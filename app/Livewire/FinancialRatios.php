@@ -1,0 +1,118 @@
+<?php
+
+namespace App\Livewire;
+
+use Livewire\Component;
+use Livewire\Attributes\Url;
+use App\Models\FinancialRatio;
+use App\Models\Period;
+
+class FinancialRatios extends Component
+{
+    public $selectedCategory = '';
+
+    #[Url(as: 'status')]
+    public $selectedStatus = '';
+
+    #[Url(as: 'period')]
+    public $selectedPeriod = '2026-08';
+
+    public $editingRatioId = null;
+    public $editTarget = 0;
+    public $editActual = 0;
+
+    public function mount()
+    {
+        if (request()->query('status')) {
+            $this->selectedStatus = request()->query('status');
+        }
+        if (request()->query('period')) {
+            $this->selectedPeriod = request()->query('period');
+        }
+    }
+
+    public function editRatio($id)
+    {
+        $periodObj = Period::where('period', $this->selectedPeriod)->first();
+        if ($periodObj && $periodObj->isClosed()) {
+            session()->flash('error', 'Periode ' . $this->selectedPeriod . ' telah DITUTUP (CLOSED). Data tidak dapat diubah.');
+            return;
+        }
+
+        $ratio = FinancialRatio::findOrFail($id);
+        $this->editingRatioId = $ratio->id;
+        $this->editTarget = $ratio->target;
+        $this->editActual = $ratio->actual;
+    }
+
+    public function updateRatio()
+    {
+        if (!$this->editingRatioId) return;
+
+        $periodObj = Period::where('period', $this->selectedPeriod)->first();
+        if ($periodObj && $periodObj->isClosed()) {
+            session()->flash('error', 'Periode ' . $this->selectedPeriod . ' telah DITUTUP (CLOSED). Data tidak dapat diubah.');
+            $this->editingRatioId = null;
+            return;
+        }
+
+        $ratio = FinancialRatio::findOrFail($this->editingRatioId);
+        $target = floatval($this->editTarget);
+        $actual = floatval($this->editActual);
+
+        // Simple percentage calculation
+        $ach = $target > 0 ? round(($actual / $target) * 100, 2) : 100;
+        if ($ach > 100) $ach = 100.00;
+        
+        $status = 'Waspada';
+        if ($ach >= 100) {
+            $status = 'Tercapai';
+        } elseif ($ach < 80) {
+            $status = 'Di Bawah Target';
+        }
+
+        $ratio->update([
+            'target' => $target,
+            'actual' => $actual,
+            'achievement_pct' => $ach,
+            'status' => $status,
+        ]);
+
+        $this->editingRatioId = null;
+        session()->flash('message', 'Nilai rasio ' . $ratio->ratio_name . ' berhasil diperbarui!');
+    }
+
+    public function cancelEdit()
+    {
+        $this->editingRatioId = null;
+    }
+
+    public function render()
+    {
+        $periodObj = Period::where('period', $this->selectedPeriod)->first();
+        $isClosed = $periodObj ? $periodObj->isClosed() : false;
+
+        $query = FinancialRatio::where('period', $this->selectedPeriod);
+        if ($this->selectedCategory) {
+            $query->where('category', $this->selectedCategory);
+        }
+        if ($this->selectedStatus) {
+            if ($this->selectedStatus === 'bermasalah') {
+                $query->whereIn('status', ['Waspada', 'Di Bawah Target', 'Off-Target']);
+            } else {
+                $query->where('status', $this->selectedStatus);
+            }
+        }
+        $ratios = $query->get();
+
+        $categories = FinancialRatio::distinct()->pluck('category')->toArray();
+        $periods = Period::pluck('period')->toArray();
+
+        return view('livewire.financial-ratios', [
+            'ratios' => $ratios,
+            'categories' => $categories,
+            'periods' => $periods,
+            'isClosed' => $isClosed,
+        ])->layout('layouts.app', ['title' => 'Rasio Keuangan']);
+    }
+}
