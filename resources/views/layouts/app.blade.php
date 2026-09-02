@@ -131,6 +131,22 @@
                             <p>Staging & Audit Log</p>
                         </a>
                     </li>
+
+                    <li class="nav-header">ADMINISTRASI</li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('manage-users') }}" class="nav-link {{ request()->routeIs('manage-users') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users-cog"></i>
+                            <p>Manage User</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('settings') }}" class="nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-cogs"></i>
+                            <p>Setting</p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

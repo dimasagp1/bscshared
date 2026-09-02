@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Models\AppSetting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('app_settings')) {
+                $settings = AppSetting::pluck('value', 'key')->toArray();
+                View::share('globalAppSettings', $settings);
+            }
+        } catch (\Throwable $e) {
+            // ignore during migrate
+        }
     }
 }
