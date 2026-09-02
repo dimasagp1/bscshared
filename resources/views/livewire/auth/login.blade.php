@@ -1,0 +1,70 @@
+<div class="login-shell">
+    <div class="login-full">
+        {{-- Brand Zone — fullscreen left 42% --}}
+        <div class="login-brand">
+            <div class="text-center mb-4">
+                <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+            </div>
+            <h3 class="text-center mb-1">Super Apps BSC</h3>
+            <p class="text-center brand-subtitle mb-4">PT Herbatech Innopharma</p>
+            <div class="brand-quote">
+                <p>Satu sumber kebenaran skor kinerja — dari revenue puncak hingga action plan mitigasi, dapat ditelusuri dalam ≤3 klik.</p>
+            </div>
+            <div class="mt-4 d-flex align-items-center justify-content-center" style="gap:8px;">
+                <span style="width:6px;height:6px;border-radius:9999px;background:var(--c-secondary-container);display:inline-block;"></span>
+                <span style="font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--c-on-primary-container);">Hop 4 · Konsolidasi & Lineage</span>
+            </div>
+        </div>
+
+        {{-- Action Zone — fullscreen right 58% --}}
+        <div class="login-form-wrap">
+            <div class="mb-3">
+                <h4 class="mb-1">Masuk ke Akun Anda</h4>
+                <p class="mb-0" style="font-size:14px; line-height:1.5; color:var(--c-on-variant);">Gunakan email & password sesuai role Anda. Sistem akan mengarahkan otomatis.</p>
+            </div>
+
+            @if(session()->has('status'))
+                <div class="alert alert-success py-2"><i class="fas fa-check-circle mr-1"></i> {{ session('status') }}</div>
+            @endif
+            @if(session()->has('error'))
+                <div class="alert alert-danger py-2"><i class="fas fa-exclamation-triangle mr-1"></i> {{ session('error') }}</div>
+            @endif
+            @if(session()->has('expired_msg'))
+                <div class="alert alert-warning py-2"><i class="fas fa-clock mr-1"></i> {{ session('expired_msg') }}</div>
+            @endif
+
+            <form wire:submit.prevent="login" novalidate>
+                <div class="form-group mb-3">
+                    <label class="form-label-premium">Email <span style="color:var(--c-error)">*</span></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-envelope"></i></span></div>
+                        <input type="email" wire:model="email" class="form-control @error('email') is-invalid @enderror" placeholder="superadmin@herbatech.co.id" autofocus autocomplete="email">
+                    </div>
+                    @error('email') <span class="invalid-feedback d-block" style="font-size:12px;">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label-premium">Password <span style="color:var(--c-error)">*</span></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-lock"></i></span></div>
+                        <input type="password" wire:model="password" class="form-control @error('password') is-invalid @enderror" placeholder="••••••••" autocomplete="current-password">
+                    </div>
+                    @error('password') <span class="invalid-feedback d-block" style="font-size:12px;">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between" style="margin-bottom:16px;">
+                    
+                    <small style="font-size:12px; font-weight:500; color:var(--c-on-variant);">Lupa password? Hubungi Super Admin</small>
+                </div>
+
+                <button type="submit" wire:loading.attr="disabled" class="btn btn-teal btn-block">
+                    <span wire:loading.remove><i class="fas fa-arrow-right mr-1"></i> Masuk</span>
+                    <span wire:loading><i class="fas fa-spinner fa-spin mr-1"></i> Memproses...</span>
+                </button>
+            </form>
+
+            <div class="divider-hairline my-4"></div>
+            <div class="text-center" style="font-size:12px; color:var(--c-on-variant);">&copy; 2026 PT Herbatech Innopharma · Super Apps BSC Hop 4</div>
+        </div>
+    </div>
+</div>

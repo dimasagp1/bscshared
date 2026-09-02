@@ -45,11 +45,15 @@
                     <i class="fas fa-calendar-alt mr-1"></i> Periode Aktif: <strong>2026-08</strong>
                 </a>
             </li>
+            @auth
             <li class="nav-item">
-                <a class="nav-link" href="#" title="User Profile">
-                    <i class="fas fa-user-circle"></i> Super Admin
+                <a id="navLogoutTrigger" class="nav-link d-flex align-items-center" href="javascript:void(0)" onclick="event.preventDefault(); if(window.jQuery){ jQuery('#logoutModal').modal('show'); } return false;" title="Klik untuk logout — {{ auth()->user()->name }} ({{ auth()->user()->getRoleNames()->first() ?? 'User' }})" style="cursor:pointer;">
+                    <i class="fas fa-user-circle mr-1"></i>
+                    <span class="d-none d-md-inline">{{ Str::limit(auth()->user()->name, 18) }}</span>
+                    <small class="badge badge-light ml-2 d-none d-lg-inline">{{ auth()->user()->getRoleNames()->first() ?? 'User' }}</small>
                 </a>
             </li>
+            @endauth
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -68,11 +72,14 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <div class="img-circle elevation-2 bg-info text-center text-white" style="width: 34px; height: 34px; line-height: 34px; font-weight: bold;">
-                        SA
+                        {{ auth()->check() ? strtoupper(substr(auth()->user()->name,0,2)) : 'SA' }}
                     </div>
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Administrator BSC</a>
+                    <a href="#" class="d-block">{{ auth()->check() ? Str::limit(auth()->user()->name,20) : 'Administrator BSC' }}</a>
+                    @auth
+                    <small class="text-white-50 d-block" style="font-size:11px; opacity:.7;">{{ auth()->user()->getRoleNames()->first() ?? '-' }} {{ auth()->user()->dept_code ? '· '.auth()->user()->dept_code : '' }}</small>
+                    @endauth
                 </div>
             </div>
 
@@ -170,14 +177,60 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- Logout Confirmation Popup (FR-15: click account icon -> popup logout) -->
+@auth
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-0 shadow-lg" style="border-radius:14px; overflow:hidden;">
+      <div class="modal-header bg-danger text-white border-0">
+        <h5 class="modal-title font-weight-bold" id="logoutModalLabel"><i class="fas fa-sign-out-alt mr-2"></i> Konfirmasi Logout</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <div class="mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;">
+            <i class="fas fa-user-times text-danger" style="font-size:28px;"></i>
+        </div>
+        <p class="mb-1">Anda akan keluar dari sesi <strong>{{ auth()->user()->name }}</strong></p>
+        <p class="text-muted small mb-0">Sesi akan diakhiri dan Anda akan diarahkan ke halaman login. Lanjutkan?</p>
+      </div>
+      <div class="modal-footer bg-light border-0 d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary px-4" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Batal</button>
+        <form method="POST" action="{{ route('logout') }}" class="mb-0">
+            @csrf
+            <button type="submit" class="btn btn-danger px-4 font-weight-bold"><i class="fas fa-sign-out-alt mr-1"></i> Ya, Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endauth
+
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
 @livewireScripts
+<script>
+// FR-15 fallback: pastikan klik profil selalu buka #logoutModal meski data-toggle terhalang Livewire/AdminLTE (fix # -> /# )
+document.addEventListener('DOMContentLoaded', function(){
+  var trigger = document.getElementById('navLogoutTrigger');
+  var modal = document.getElementById('logoutModal');
+  if(!trigger || !modal) return;
+  trigger.addEventListener('click', function(e){
+    e.preventDefault();
+    if(window.jQuery && jQuery.fn.modal){ jQuery(modal).modal('show'); }
+    else { modal.classList.add('show'); modal.style.display='block'; modal.setAttribute('aria-modal','true'); }
+    return false;
+  });
+  // ESC & backdrop click close fallback
+  modal.addEventListener('click', function(e){
+    if(e.target === modal && window.jQuery){ jQuery(modal).modal('hide'); }
+  });
+});
+</script>
 </body>
 </html>
