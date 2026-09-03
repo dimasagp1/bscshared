@@ -10,10 +10,6 @@
             <div class="brand-quote">
                 <p>Satu sumber kebenaran skor kinerja — dari revenue puncak hingga action plan mitigasi, dapat ditelusuri dalam ≤3 klik.</p>
             </div>
-            <div class="mt-4 d-flex align-items-center justify-content-center" style="gap:8px;">
-                <span style="width:6px;height:6px;border-radius:9999px;background:var(--c-secondary-container);display:inline-block;"></span>
-                <span style="font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--c-on-primary-container);">Hop 4 · Konsolidasi & Lineage</span>
-            </div>
         </div>
 
         {{-- Action Zone — fullscreen right 58% --}}
