@@ -83,77 +83,164 @@
                 </div>
             </div>
 
-            <!-- Sidebar Menu -->
+            <!-- Sidebar Menu — RBAC 13 Menu PRD Tabel 4 (hanya tampil sesuai permission) -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-header">KONSOLIDASI KINERJA</li>
-                    
+                    @can('view dashboard')
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Piramida BSC</p>
                         </a>
                     </li>
-                    
+                    @endcan
+                    @can('view ratios')
                     <li class="nav-item">
                         <a href="{{ route('financial-ratios') }}" class="nav-link {{ request()->routeIs('financial-ratios') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-coins"></i>
                             <p>Rasio Keuangan</p>
                         </a>
                     </li>
-
+                    @endcan
+                    @can('view objectives')
                     <li class="nav-item">
                         <a href="{{ route('department-objectives') }}" class="nav-link {{ request()->routeIs('department-objectives') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-bullseye"></i>
                             <p>Objective Departemen</p>
                         </a>
                     </li>
-
+                    @endcan
+                    @can('view actionplans')
                     <li class="nav-item">
                         <a href="{{ route('action-plans') }}" class="nav-link {{ request()->routeIs('action-plans') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tasks"></i>
                             <p>Program Kerja (Action)</p>
                         </a>
                     </li>
-
+                    @endcan
+                    @can('view wiring')
                     <li class="nav-item">
                         <a href="{{ route('bsc-wiring') }}" class="nav-link {{ request()->routeIs('bsc-wiring') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-project-diagram"></i>
                             <p>Wiring / Peta Hubungan</p>
                         </a>
                     </li>
+                    @endcan
 
+                    @canany(['view dampak','view coa','view sensitivity','view skenario'])
+                    <li class="nav-header">SIMULASI & ANALISIS</li>
+                    @endcanany
+                    @can('view dampak')
+                    <li class="nav-item">
+                        <a href="{{ route('dampak') }}" class="nav-link {{ request()->routeIs('dampak') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-flask"></i>
+                            <p>Uji Dampak / What-If</p>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('view coa')
+                    <li class="nav-item">
+                        <a href="{{ route('coa') }}" class="nav-link {{ request()->routeIs('coa') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-calculator"></i>
+                            <p>Simulasi CoA</p>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('view sensitivity')
+                    <li class="nav-item">
+                        <a href="{{ route('sensitivity') }}" class="nav-link {{ request()->routeIs('sensitivity') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-chart-area"></i>
+                            <p>Sensitivitas</p>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('view skenario')
+                    <li class="nav-item">
+                        <a href="{{ route('skenario') }}" class="nav-link {{ request()->routeIs('skenario') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-layer-group"></i>
+                            <p>Skenario</p>
+                        </a>
+                    </li>
+                    @endcan
+
+                    @can('view ibp')
+                    <li class="nav-header">PERENCANAAN</li>
+                    <li class="nav-item">
+                        <a href="{{ route('ibp') }}" class="nav-link {{ request()->routeIs('ibp') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-handshake"></i>
+                            <p>Konsensus IBP</p>
+                        </a>
+                    </li>
+                    @endcan
+
+                    @can('view dokumentasi')
+                    <li class="nav-header">DOKUMENTASI</li>
+                    <li class="nav-item">
+                        <a href="{{ route('dokumentasi') }}" class="nav-link {{ request()->routeIs('dokumentasi') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Dokumentasi Metode</p>
+                        </a>
+                    </li>
+                    @endcan
+
+                    @canany(['view integration','view staging','view gateway'])
                     <li class="nav-header">INTEGRASI & AUDIT</li>
-
+                    @endcanany
+                    @can('view integration')
                     <li class="nav-item">
                         <a href="{{ route('system-integration') }}" class="nav-link {{ request()->routeIs('system-integration') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-plug"></i>
                             <p>Integrasi & Gateway</p>
                         </a>
                     </li>
-
+                    @endcan
+                    @can('view staging')
                     <li class="nav-item">
                         <a href="{{ route('staging-logs') }}" class="nav-link {{ request()->routeIs('staging-logs') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-network-wired"></i>
                             <p>Staging & Audit Log</p>
                         </a>
                     </li>
+                    @endcan
+                    @can('view gateway')
+                        @cannot('view integration')
+                        <li class="nav-item">
+                            <a href="{{ route('system-integration') }}" class="nav-link {{ request()->routeIs('system-integration') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-plug"></i>
+                                <p>Integrasi & Gateway</p>
+                            </a>
+                        </li>
+                        @endcannot
+                        @cannot('view staging')
+                        <li class="nav-item">
+                            <a href="{{ route('staging-logs') }}" class="nav-link {{ request()->routeIs('staging-logs') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-network-wired"></i>
+                                <p>Staging & Audit Log</p>
+                            </a>
+                        </li>
+                        @endcannot
+                    @endcan
 
+                    @canany(['manage users','manage settings','view systeminfo','manage apikey','can_manage_users'])
                     <li class="nav-header">ADMINISTRASI</li>
-
+                    @endcanany
+                    @can('manage users')
                     <li class="nav-item">
                         <a href="{{ route('manage-users') }}" class="nav-link {{ request()->routeIs('manage-users') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users-cog"></i>
                             <p>Manage User</p>
                         </a>
                     </li>
-
+                    @endcan
+                    @canany(['manage settings','view systeminfo','manage apikey'])
                     <li class="nav-item">
                         <a href="{{ route('settings') }}" class="nav-link {{ request()->routeIs('settings') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>Setting</p>
                         </a>
                     </li>
+                    @endcanany
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

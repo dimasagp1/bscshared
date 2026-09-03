@@ -28,6 +28,10 @@ class ActionPlans extends Component
 
     public function createPlan()
     {
+        if (!auth()->user()?->can('manage actionplans')) {
+            session()->flash('error', 'Akses ditolak: butuh manage actionplans (HRIS, FAT, Kadep, Operator, Super Admin). Viewer baca-saja.');
+            return;
+        }
         $this->validate([
             'title' => 'required|min:5|max:255',
             'ownerDept' => 'required|string|max:30',
@@ -47,6 +51,10 @@ class ActionPlans extends Component
 
     public function editProgressModal($id)
     {
+        if (!auth()->user()?->can('manage actionplans')) {
+            session()->flash('error', 'Akses ditolak: butuh manage actionplans untuk ubah progres.');
+            return;
+        }
         $plan = ActionPlan::findOrFail($id);
         $this->editingPlanId = $plan->id;
         $this->editProgress = $plan->progress_pct;
@@ -55,6 +63,11 @@ class ActionPlans extends Component
     public function updateProgress()
     {
         if (!$this->editingPlanId) return;
+        if (!auth()->user()?->can('manage actionplans')) {
+            session()->flash('error', 'Akses ditolak: peran Anda tidak berwenang.');
+            $this->editingPlanId = null;
+            return;
+        }
 
         $plan = ActionPlan::findOrFail($this->editingPlanId);
         $prog = intval($this->editProgress);

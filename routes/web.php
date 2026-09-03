@@ -26,15 +26,40 @@ Route::post('/logout', function (\Illuminate\Http\Request $request) {
     return redirect()->route('login')->with('status', 'Anda telah berhasil logout.');
 })->middleware('auth')->name('logout');
 
-// Protected App Routes
+// Protected App Routes — 13 Menu PRD §4 Tabel 4 (permission enforced server-side §9)
 Route::middleware(['auth', 'active'])->group(function () {
-    Route::get('/', BscDashboard::class)->name('dashboard');
-    Route::get('/ratios', FinancialRatios::class)->name('financial-ratios');
-    Route::get('/objectives', DepartmentObjectives::class)->name('department-objectives');
-    Route::get('/action-plans', ActionPlans::class)->name('action-plans');
-    Route::get('/wiring', BscWiring::class)->name('bsc-wiring');
-    Route::get('/integration', SystemIntegration::class)->name('system-integration');
-    Route::get('/staging-logs', StagingLogs::class)->name('staging-logs');
-    Route::get('/manage-users', ManageUsers::class)->name('manage-users');
-    Route::get('/settings', AppSettings::class)->name('settings');
+    // 1 Piramida — view dashboard (semua peran punya)
+    Route::get('/', BscDashboard::class)->middleware('permission:view dashboard')->name('dashboard');
+    // 2 Rasio — view ratios (read), manage ratios (write)
+    Route::get('/ratios', FinancialRatios::class)->middleware('permission:view ratios|view dashboard')->name('financial-ratios');
+    // 3 Objective — view objectives
+    Route::get('/objectives', DepartmentObjectives::class)->middleware('permission:view objectives|view dashboard')->name('department-objectives');
+    // 4 Wiring — view wiring
+    Route::get('/wiring', BscWiring::class)->middleware('permission:view wiring')->name('bsc-wiring');
+    // 5 Dampak / What-If Sandbox — view dampak (Super Admin, FAT, Kadep)
+    Route::get('/dampak', \App\Livewire\ComingSoon::class)->middleware('permission:view dampak')->name('dampak')
+        ->defaults('title', 'Uji Dampak / What-If Sandbox')->defaults('desc', 'Sandbox simulasi KPI hipotetis — pratinjau debet-kredit tanpa menyentuh data produksi.');
+    // 6 Simulasi CoA — view coa (Super Admin, FAT)
+    Route::get('/coa', \App\Livewire\ComingSoon::class)->middleware('permission:view coa')->name('coa')
+        ->defaults('title', 'Simulasi CoA')->defaults('desc', 'Stress-test bagan akun hipotetis — konsisten rumus rasio Menu 2.');
+    // 7 Action Plan — view actionplans
+    Route::get('/action-plans', ActionPlans::class)->middleware('permission:view actionplans|view dashboard')->name('action-plans');
+    // 8 Konsensus IBP — view ibp
+    Route::get('/ibp', \App\Livewire\ComingSoon::class)->middleware('permission:view ibp')->name('ibp')
+        ->defaults('title', 'Konsensus IBP')->defaults('desc', 'IBP 5 langkah: Product→Demand→Supply→Rekonsiliasi Finansial→MBR, proyeksi 12 bulan.');
+    // 9 Sensitivitas — view sensitivity
+    Route::get('/sensitivity', \App\Livewire\ComingSoon::class)->middleware('permission:view sensitivity')->name('sensitivity')
+        ->defaults('title', 'Sensitivitas')->defaults('desc', 'Margin keamanan rasio terhadap skenario normal/moderat/krisis.');
+    // 10 Skenario — view skenario
+    Route::get('/skenario', \App\Livewire\ComingSoon::class)->middleware('permission:view skenario')->name('skenario')
+        ->defaults('title', 'Skenario')->defaults('desc', 'Simpan/muat skenario, undo/redo 50 langkah.');
+    // 11 Dokumentasi Metode — view dokumentasi
+    Route::get('/dokumentasi', \App\Livewire\ComingSoon::class)->middleware('permission:view dokumentasi')->name('dokumentasi')
+        ->defaults('title', 'Dokumentasi Metode')->defaults('desc', 'Metodologi skoring polaritas/band/cap/agregasi + self-test 12s.');
+    // 12 Gateway & Audit — view gateway (umbrella) + specific
+    Route::get('/integration', SystemIntegration::class)->middleware('permission:view integration|view gateway')->name('system-integration');
+    Route::get('/staging-logs', StagingLogs::class)->middleware('permission:view staging|view gateway')->name('staging-logs');
+    // 13 Super Admin & Konfigurasi — manage users/settings/systeminfo/apikey
+    Route::get('/manage-users', ManageUsers::class)->middleware('permission:manage users|can_manage_users')->name('manage-users');
+    Route::get('/settings', AppSettings::class)->middleware('permission:manage settings|view systeminfo|manage apikey')->name('settings');
 });

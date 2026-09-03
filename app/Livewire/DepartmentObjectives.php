@@ -33,6 +33,10 @@ class DepartmentObjectives extends Component
 
     public function editObjective($id)
     {
+        if (!auth()->user()?->can('manage objectives') && !auth()->user()?->can('can_write_kpi')) {
+            session()->flash('error', 'Akses ditolak: butuh manage objectives / can_write_kpi (HRIS, FAT, Kadep, Operator, Super Admin). Viewer tidak dapat mengubah KPI.');
+            return;
+        }
         $periodObj = Period::where('period', $this->selectedPeriod)->first();
         if ($periodObj && $periodObj->isClosed()) {
             session()->flash('error', 'Periode ' . $this->selectedPeriod . ' telah DITUTUP (CLOSED). Data tidak dapat diubah.');
@@ -48,6 +52,11 @@ class DepartmentObjectives extends Component
     public function updateObjective()
     {
         if (!$this->editingObjId) return;
+        if (!auth()->user()?->can('manage objectives') && !auth()->user()?->can('can_write_kpi')) {
+            session()->flash('error', 'Akses ditolak: peran Anda tidak berwenang mengubah KPI.');
+            $this->editingObjId = null;
+            return;
+        }
 
         $periodObj = Period::where('period', $this->selectedPeriod)->first();
         if ($periodObj && $periodObj->isClosed()) {

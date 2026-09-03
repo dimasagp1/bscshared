@@ -33,6 +33,10 @@ class FinancialRatios extends Component
 
     public function editRatio($id)
     {
+        if (!auth()->user()?->can('manage ratios')) {
+            session()->flash('error', 'Akses ditolak: peran Anda tidak berwenang mengelola rasio (butuh manage ratios / Admin FAT / Super Admin).');
+            return;
+        }
         $periodObj = Period::where('period', $this->selectedPeriod)->first();
         if ($periodObj && $periodObj->isClosed()) {
             session()->flash('error', 'Periode ' . $this->selectedPeriod . ' telah DITUTUP (CLOSED). Data tidak dapat diubah.');
@@ -48,6 +52,11 @@ class FinancialRatios extends Component
     public function updateRatio()
     {
         if (!$this->editingRatioId) return;
+        if (!auth()->user()?->can('manage ratios')) {
+            session()->flash('error', 'Akses ditolak: peran Anda tidak berwenang mengelola rasio.');
+            $this->editingRatioId = null;
+            return;
+        }
 
         $periodObj = Period::where('period', $this->selectedPeriod)->first();
         if ($periodObj && $periodObj->isClosed()) {
