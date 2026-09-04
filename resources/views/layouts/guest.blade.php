@@ -8,8 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Font Awesome Icons (Local with CDN fallback) -->
+    @if(file_exists(public_path('vendor/fontawesome/css/all.min.css')))
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
+    @else
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    @endif
+
+    <!-- AdminLTE v3 Theme (Local with CDN fallback) -->
+    @if(file_exists(public_path('vendor/adminlte/css/adminlte.min.css')))
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/adminlte.min.css') }}">
+    @else
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    @endif
+
     @livewireStyles
     <style>
         :root{
@@ -104,8 +116,17 @@
 </head>
 <body class="hold-transition login-page">
 {{ $slot }}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+@if(file_exists(public_path('vendor/jquery/jquery.min.js')))
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+@else
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@endif
+
+@if(file_exists(public_path('vendor/bootstrap/js/bootstrap.bundle.min.js')))
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+@else
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+@endif
 @livewireScripts
 </body>
 </html>

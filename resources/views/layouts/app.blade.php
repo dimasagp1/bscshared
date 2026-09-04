@@ -5,23 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? 'Super Apps BSC' }} - PT Herbatech Innopharma</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Theme style (AdminLTE v3) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+Pro:wght@300;400;600;700&display=fallback" rel="stylesheet">
+
+    <!-- Font Awesome Icons (Local with CDN fallback) -->
+    @if(file_exists(public_path('vendor/fontawesome/css/all.min.css')))
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
+    @else
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    @endif
+
+    <!-- AdminLTE v3 Theme (Local with CDN fallback) -->
+    @if(file_exists(public_path('vendor/adminlte/css/adminlte.min.css')))
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/adminlte.min.css') }}">
+    @else
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    @endif
+
+    <!-- Custom Super Apps BSC Styling -->
+    <link rel="stylesheet" href="{{ asset('css/custom-app.css') }}">
 
     @livewireStyles
-    <style>
-        .brand-text-custom {
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .badge-tercapai { background-color: #28a745; color: white; }
-        .badge-waspada { background-color: #ffc107; color: #1f2d3d; }
-        .badge-dibawah { background-color: #dc3545; color: white; }
-    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
@@ -292,13 +298,24 @@
 </div>
 @endauth
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<!-- REQUIRED SCRIPTS (Local with CDN fallback) -->
+@if(file_exists(public_path('vendor/jquery/jquery.min.js')))
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+@else
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@endif
+
+@if(file_exists(public_path('vendor/bootstrap/js/bootstrap.bundle.min.js')))
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+@else
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+@endif
+
+@if(file_exists(public_path('vendor/adminlte/js/adminlte.min.js')))
+    <script src="{{ asset('vendor/adminlte/js/adminlte.min.js') }}"></script>
+@else
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+@endif
 
 @livewireScripts
 <script>
