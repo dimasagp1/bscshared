@@ -12,6 +12,8 @@ use App\Livewire\SystemIntegration;
 use App\Livewire\BscWiring;
 use App\Livewire\ManageUsers;
 use App\Livewire\AppSettings;
+use App\Livewire\SensitivityAnalysis;
+use App\Livewire\MethodDocumentation;
 
 // Guest: Login 
 Route::middleware('guest')->group(function () {
@@ -48,14 +50,12 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/ibp', \App\Livewire\ComingSoon::class)->middleware('permission:view ibp')->name('ibp')
         ->defaults('title', 'Konsensus IBP')->defaults('desc', 'IBP 5 langkah: Product→Demand→Supply→Rekonsiliasi Finansial→MBR, proyeksi 12 bulan.');
     // 9 Sensitivitas — view sensitivity
-    Route::get('/sensitivity', \App\Livewire\ComingSoon::class)->middleware('permission:view sensitivity')->name('sensitivity')
-        ->defaults('title', 'Sensitivitas')->defaults('desc', 'Margin keamanan rasio terhadap skenario normal/moderat/krisis.');
+    Route::get('/sensitivity', SensitivityAnalysis::class)->middleware('permission:view sensitivity|view dashboard')->name('sensitivity');
     // 10 Skenario — view skenario
     Route::get('/skenario', \App\Livewire\ComingSoon::class)->middleware('permission:view skenario')->name('skenario')
         ->defaults('title', 'Skenario')->defaults('desc', 'Simpan/muat skenario, undo/redo 50 langkah.');
     // 11 Dokumentasi Metode — view dokumentasi
-    Route::get('/dokumentasi', \App\Livewire\ComingSoon::class)->middleware('permission:view dokumentasi')->name('dokumentasi')
-        ->defaults('title', 'Dokumentasi Metode')->defaults('desc', 'Metodologi skoring polaritas/band/cap/agregasi + self-test 12s.');
+    Route::get('/dokumentasi', MethodDocumentation::class)->middleware('permission:view dokumentasi|view dashboard')->name('dokumentasi');
     // 12 Gateway & Audit — view gateway (umbrella) + specific
     Route::get('/integration', SystemIntegration::class)->middleware('permission:view integration|view gateway')->name('system-integration');
     Route::get('/staging-logs', StagingLogs::class)->middleware('permission:view staging|view gateway')->name('staging-logs');

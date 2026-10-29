@@ -12,19 +12,24 @@ use App\Models\Period;
 class BscWiring extends Component
 {
     #[Url(as: 'period')]
-    public $selectedPeriod = '2026-08';
+    public $selectedPeriod = '2026-10';
 
     public $revenueBaseline = 120.00; // Miliar IDR
     public $revenueActual = 115.20;   // Miliar IDR
     
-    public $activeTab = 'flow'; // 'flow' (Diagram Alur Bezier Makro) or 'cascade' (Wiring Sasaran Mutu (64 KPI))
-    public $cascadeValue = 80.000; // Value for Uji Kaskade Revenue slider (Rp 80.000 JT)
+    public $activeTab = 'cascade'; // 'flow' (Diagram Alur Bezier Makro) or 'cascade' (Wiring Sasaran Mutu (64 KPI))
+    public $cascadeValue = 100.000; // Value for Uji Kaskade Revenue slider (Rp 1.000.000 JT)
     public $selectedUnit = 'all'; // Unit kerja filter
     public $hanyaBergeser = false; // Checkbox filter
 
     public function switchTab($tab)
     {
         $this->activeTab = $tab;
+    }
+
+    public function simulateCascade()
+    {
+        session()->flash('message', 'Simulasi Kaskade aktif: Transmisi perubahan nilai revenue Rp ' . number_format($this->cascadeValue * 1000, 0, ',', '.') . ' JT telah dikalkulasikan ke seluruh sasaran mutu.');
     }
 
     public function render()
@@ -267,7 +272,7 @@ class BscWiring extends Component
             'filteredDepartments' => $filteredDepartments,
             'deptCards' => $deptCards,
             'filteredDeptCards' => $filteredDeptCards,
-        ])->layout('layouts.app', ['title' => 'Wiring / Peta Hubungan']);
+        ])->layout('layouts.app', ['pageTitle' => 'Wiring / Peta Hubungan Transmisi Kaskade']);
     }
 }
 
