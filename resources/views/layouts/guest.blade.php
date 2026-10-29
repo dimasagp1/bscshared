@@ -6,6 +6,15 @@
     <meta name="theme-color" content="#166534">
     <title>{{ $title ?? 'Login' }} - Super Apps PT Herbatech Innopharma</title>
 
+    <!-- Dark Mode FOUC Prevention Script -->
+    <script>
+        if (localStorage.getItem('bsc_dark_mode') === 'true' || (!('bsc_dark_mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
     <!-- Google Fonts: Manrope, Inter, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +27,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -45,15 +55,13 @@
     <style>
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f1f5f9 100%);
-            min-height: 100vh;
         }
         h1, h2, h3, h4 {
             font-family: 'Manrope', system-ui, sans-serif;
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-4 min-h-screen text-slate-800 antialiased selection:bg-green-100 selection:text-green-900">
+<body class="bg-[#F8FAFC] dark:bg-[#0B1120] flex items-center justify-center p-4 min-h-screen text-slate-800 dark:text-slate-100 antialiased selection:bg-green-100 selection:text-green-900 transition-colors duration-200">
     <main class="w-full flex items-center justify-center">
         {{ $slot }}
     </main>

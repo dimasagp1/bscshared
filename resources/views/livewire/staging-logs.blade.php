@@ -1,63 +1,63 @@
 <div class="space-y-6">
     <!-- Header Banner -->
-    <div class="bg-white rounded-3xl border border-gray-200 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4">
+    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-700 flex items-center justify-center text-xl shadow-xs">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-transparent dark:border-cyan-900/50 flex items-center justify-center text-xl shadow-xs">
                 <i class="fas fa-clock-rotate-left"></i>
             </div>
             <div>
                 <div class="flex items-center gap-2">
-                    <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-100 text-cyan-700">AUDIT LOG</span>
-                    <h2 class="text-base font-bold text-gray-900">Staging &amp; Audit Log Integrasi Hop 4</h2>
+                    <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300">AUDIT LOG</span>
+                    <h2 class="text-base font-bold text-gray-900 dark:text-white">Staging &amp; Audit Log Integrasi Hop 4</h2>
                 </div>
-                <p class="text-xs text-gray-500 mt-0.5">
+                <p class="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
                     Rekonsiliasi transaksi, verifikasi hash idempotency, dan audit trail data payload sebelum skoring piramida.
                 </p>
             </div>
         </div>
 
         <div class="flex items-center gap-2">
-            <a href="{{ route('system-integration') }}" class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors">
-                <i class="fas fa-network-wired mr-1.5 text-gray-400"></i> Pengaturan Gateway Inbound
+            <a href="{{ route('system-integration') }}" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300 transition-colors">
+                <i class="fas fa-network-wired mr-1.5 text-gray-400 dark:text-slate-500"></i> Pengaturan Gateway Inbound
             </a>
         </div>
     </div>
 
     <!-- FLASH MESSAGES -->
     @if(session()->has('message'))
-        <div class="rounded-xl bg-cyan-50 border border-cyan-200 p-3.5 text-xs text-cyan-800 flex items-center gap-2">
-            <i class="fas fa-info-circle text-cyan-600"></i>
+        <div class="rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/50 p-3.5 text-xs text-cyan-800 dark:text-cyan-300 flex items-center gap-2">
+            <i class="fas fa-info-circle text-cyan-600 dark:text-cyan-400"></i>
             <span>{{ session('message') }}</span>
         </div>
     @endif
 
     <!-- TELEMETRY & RECONCILIATION SUMMARY (4 CARDS) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="p-4 rounded-2xl bg-white border border-gray-200 shadow-xs">
-            <span class="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Control Total Match</span>
-            <span class="text-base font-extrabold text-gray-900 font-mono mt-1 block">{{ $reconciliationMetrics['control_total'] }}</span>
-            <span class="text-[11px] text-[#166534] font-medium mt-1 flex items-center gap-1">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+            <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Control Total Match</span>
+            <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['control_total'] }}</span>
+            <span class="text-[11px] text-[#166534] dark:text-emerald-400 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-check-circle text-[10px]"></i> 100% Cocok SSOT
             </span>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-gray-200 shadow-xs">
-            <span class="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Integritas Hash (Idempotency)</span>
-            <span class="text-base font-extrabold text-gray-900 font-mono mt-1 block">{{ $reconciliationMetrics['hash_integrity'] }}</span>
-            <span class="text-[11px] text-cyan-700 font-medium mt-1 flex items-center gap-1">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+            <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Integritas Hash (Idempotency)</span>
+            <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['hash_integrity'] }}</span>
+            <span class="text-[11px] text-cyan-700 dark:text-cyan-300 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-shield-check text-[10px]"></i> Zero Collision
             </span>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-gray-200 shadow-xs">
-            <span class="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Kelengkapan Data Periode</span>
-            <span class="text-base font-extrabold text-gray-900 font-mono mt-1 block">{{ $reconciliationMetrics['completeness'] }}</span>
-            <span class="text-[11px] text-blue-700 font-medium mt-1 flex items-center gap-1">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+            <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Kelengkapan Data Periode</span>
+            <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['completeness'] }}</span>
+            <span class="text-[11px] text-blue-700 dark:text-blue-300 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-layer-group text-[10px]"></i> 35 KPI Lengkap
             </span>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-gray-200 shadow-xs">
-            <span class="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Kesegaran Data (26 Jam)</span>
-            <span class="text-base font-extrabold text-gray-900 font-mono mt-1 block">{{ $reconciliationMetrics['freshness'] }}</span>
-            <span class="text-[11px] text-[#166534] font-medium mt-1 flex items-center gap-1">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+            <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Kesegaran Data (26 Jam)</span>
+            <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['freshness'] }}</span>
+            <span class="text-[11px] text-[#166534] dark:text-emerald-400 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-bolt text-[10px]"></i> SLA Terpenuhi
             </span>
         </div>
@@ -66,20 +66,20 @@
     <!-- MAIN 2 COLUMNS: SIMULASI & LOG TABLE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <!-- SIMULASI INBOUND (col-span-4) -->
-        <div class="lg:col-span-4 bg-white rounded-3xl border border-gray-200 p-6 shadow-xs space-y-4">
-            <h3 class="text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
-                <i class="fas fa-paper-plane text-cyan-600"></i>
+        <div class="lg:col-span-4 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs space-y-4 transition-colors duration-200">
+            <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
+                <i class="fas fa-paper-plane text-cyan-600 dark:text-cyan-400"></i>
                 <span>Simulasi Inbound API (Hop 3 &rarr; Hop 4)</span>
             </h3>
 
-            <p class="text-xs text-gray-500 leading-relaxed">
+            <p class="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">
                 Mengirimkan skor objective baru secara otomatis dari HRIS/Finance ERP ke Hop 4 dengan <code>idempotency_key</code> unik.
             </p>
 
             <div class="space-y-3 text-xs">
                 <div>
-                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Pilih Departemen Pengirim</label>
-                    <select wire:model="simulatedDept" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-800 bg-white">
+                    <label class="block font-bold text-gray-700 dark:text-slate-300 mb-1 text-[11px]">Pilih Departemen Pengirim</label>
+                    <select wire:model="simulatedDept" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-semibold text-gray-800 dark:text-slate-200 bg-white dark:bg-slate-800">
                         <option value="PROD">PROD - Produksi</option>
                         <option value="QC">QC - Quality Control</option>
                         <option value="FIN">FIN - Keuangan &amp; Akuntansi</option>
@@ -96,10 +96,10 @@
         </div>
 
         <!-- RIWAYAT LOG TABLE (col-span-8) -->
-        <div class="lg:col-span-8 bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-xs">
-            <div class="p-5 border-b border-gray-100 flex items-center justify-between">
-                <h3 class="text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
-                    <i class="fas fa-list-check text-gray-400"></i>
+        <div class="lg:col-span-8 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-xs transition-colors duration-200">
+            <div class="p-5 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+                <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fas fa-list-check text-gray-400 dark:text-slate-500"></i>
                     <span>Riwayat Staging &amp; Audit Log</span>
                 </h3>
             </div>
@@ -107,7 +107,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
                     <thead>
-                        <tr class="bg-gray-50/70 border-b border-gray-100 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                             <th class="py-3 px-4">Periode</th>
                             <th class="py-3 px-4">Dept</th>
                             <th class="py-3 px-4">Idempotency Key</th>
@@ -116,49 +116,49 @@
                             <th class="py-3 px-4">Pesan Log</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
+                    <tbody class="divide-y divide-gray-100 dark:divide-slate-800">
                         @forelse($logs as $log)
-                            <tr class="hover:bg-gray-50/50 transition-colors">
-                                <td class="py-3.5 px-4 font-mono text-gray-600 text-[11px]">
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="py-3.5 px-4 font-mono text-gray-600 dark:text-slate-400 text-[11px]">
                                     {{ $log->period }}
                                 </td>
                                 <td class="py-3.5 px-4">
-                                    <span class="px-2 py-0.5 rounded bg-gray-100 font-mono font-bold text-[10px] text-gray-700">
+                                    <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-slate-800 font-mono font-bold text-[10px] text-gray-700 dark:text-slate-300">
                                         {{ $log->dept_code }}
                                     </span>
                                 </td>
-                                <td class="py-3.5 px-4 font-mono text-[11px] text-gray-600">
+                                <td class="py-3.5 px-4 font-mono text-[11px] text-gray-600 dark:text-slate-400">
                                     {{ Str::limit($log->idempotency_key, 22) }}
                                 </td>
                                 <td class="py-3.5 px-4 text-center">
                                     @if($log->status === 'SCORED')
-                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#DCFCE7] text-[#166534] font-bold text-[10px]">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#DCFCE7] dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 font-bold text-[10px]">
                                             <i class="fas fa-check-double text-[9px]"></i> SCORED
                                         </span>
                                     @elseif($log->status === 'DELIVERED')
-                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold text-[10px]">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold text-[10px]">
                                             <i class="fas fa-inbox text-[9px]"></i> DELIVERED
                                         </span>
                                     @elseif($log->status === 'SUPERSEDED')
-                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600 font-bold text-[10px]">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 font-bold text-[10px]">
                                             <i class="fas fa-history text-[9px]"></i> SUPERSEDED
                                         </span>
                                     @else
-                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-100 text-red-700 font-bold text-[10px]">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-100 dark:bg-rose-950/60 text-red-700 dark:text-rose-300 font-bold text-[10px]">
                                             <i class="fas fa-triangle-exclamation text-[9px]"></i> ERROR
                                         </span>
                                     @endif
                                 </td>
-                                <td class="py-3.5 px-4 text-center font-mono font-bold text-gray-800">
+                                <td class="py-3.5 px-4 text-center font-mono font-bold text-gray-800 dark:text-slate-200">
                                     v{{ $log->source_version }}
                                 </td>
-                                <td class="py-3.5 px-4 text-gray-500 text-[11px]">
+                                <td class="py-3.5 px-4 text-gray-500 dark:text-slate-400 text-[11px]">
                                     {{ $log->message }}
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-gray-400 py-8 italic">
+                                <td colspan="6" class="text-center text-gray-400 dark:text-slate-500 py-8 italic">
                                     Belum ada riwayat staging log.
                                 </td>
                             </tr>
