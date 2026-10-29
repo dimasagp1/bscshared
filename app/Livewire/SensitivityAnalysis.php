@@ -3,11 +3,26 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class SensitivityAnalysis extends Component
 {
+    public $selectedPeriod = '2026-10';
     public $tighteningPct = 0; // 0 to 40%
     public $scenario = 'baseline'; // baseline, moderate, severe
+
+    public function mount()
+    {
+        $this->selectedPeriod = request()->query('period') ?: session('bsc_period', '2026-10');
+    }
+
+    #[On('periodChanged')]
+    public function onPeriodChanged($period)
+    {
+        if ($period) {
+            $this->selectedPeriod = $period;
+        }
+    }
 
     public function setScenario($scenario)
     {
@@ -166,6 +181,9 @@ class SensitivityAnalysis extends Component
             'safeCount' => $safeCount,
             'warnCount' => $warnCount,
             'dangerCount' => $dangerCount,
+            'tighteningPct' => $this->tighteningPct,
+            'scenario' => $this->scenario,
+            'selectedPeriod' => $this->selectedPeriod,
         ])->layout('layouts.app', ['pageTitle' => 'Kalibrasi & Analisis Sensitivitas']);
     }
 }

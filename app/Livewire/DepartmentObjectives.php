@@ -131,24 +131,15 @@ class DepartmentObjectives extends Component
 
     public function render()
     {
-        $periodObj = Period::where('period', $this->selectedPeriod)->first();
-        $isClosed = $periodObj ? $periodObj->isClosed() : false;
-
-        $query = DepartmentObjective::where('period', $this->selectedPeriod);
-
-        if ($this->selectedDept) {
-            $query->where('dept_code', $this->selectedDept);
+        try {
+            $periodObj = Period::where('period', $this->selectedPeriod)->first();
+            $isClosed = $periodObj ? $periodObj->isClosed() : false;
+            $allObjectives = DepartmentObjective::where('period', $this->selectedPeriod)->get();
+        } catch (\Throwable $e) {
+            $periodObj = null;
+            $isClosed = false;
+            $allObjectives = collect();
         }
-
-        if ($this->selectedStatus) {
-            if ($this->selectedStatus === 'bermasalah') {
-                $query->whereIn('status', ['Waspada', 'Di Bawah Target', 'Off-Target']);
-            } else {
-                $query->where('status', $this->selectedStatus);
-            }
-        }
-
-        $allObjectives = DepartmentObjective::where('period', $this->selectedPeriod)->get();
 
         // High-fidelity Mockup Department Card Definitions (Image 3 & Image 4)
         $departmentsMeta = [
@@ -327,6 +318,12 @@ class DepartmentObjectives extends Component
             'totalKpis' => 35,
             'issueKpis' => 4,
             'successKpis' => 31,
+            'selectedPeriod' => $this->selectedPeriod,
+            'focusMode' => $this->focusMode,
+            'openAccordions' => $this->openAccordions,
+            'showHiddenKpis' => $this->showHiddenKpis,
+            'traceModalKpi' => $this->traceModalKpi,
+            'editingObjId' => $this->editingObjId,
         ])->layout('layouts.app', ['pageTitle' => 'Objective Departemen & KPI Pendorong']);
     }
 }

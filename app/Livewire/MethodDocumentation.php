@@ -38,8 +38,11 @@ class MethodDocumentation extends Component
 
     public function render()
     {
-        return view('livewire.method-documentation')
-            ->layout('layouts.app', ['pageTitle' => 'Dokumentasi Metode & Self-Test Engine']);
+        return view('livewire.method-documentation', [
+            'isRunningTest' => $this->isRunningTest,
+            'testCompleted' => $this->testCompleted,
+            'testResults' => $this->testResults,
+        ])->layout('layouts.app', ['pageTitle' => 'Dokumentasi Metode & Self-Test Engine']);
     }
 }
 

@@ -175,12 +175,28 @@ class PeriodicMonitor extends Component
         $priorYear = (int) $this->selectedYear - 1;
         $priorYearPeriod = $priorYear . '-' . $this->selectedMonth;
         $currentMonthName = $this->months[$this->selectedMonth]['name'] ?? 'Bulan ' . $this->selectedMonth;
-        $allPeriods = Period::orderBy('period', 'desc')->get();
+        try {
+            $allPeriods = Period::orderBy('period', 'desc')->get();
+        } catch (\Throwable $e) {
+            $allPeriods = collect([
+                (object)['period' => '2026-10', 'status' => 'OPEN'],
+                (object)['period' => '2026-09', 'status' => 'CLOSED'],
+                (object)['period' => '2026-08', 'status' => 'CLOSED'],
+            ]);
+        }
 
         return view('livewire.periodic-monitor', [
             'priorYearPeriod' => $priorYearPeriod,
             'currentMonthName' => $currentMonthName,
             'allPeriods' => $allPeriods,
+            'selectedYear' => $this->selectedYear,
+            'selectedMonth' => $this->selectedMonth,
+            'selectedPeriod' => $this->selectedPeriod,
+            'viewMode' => $this->viewMode,
+            'availableYears' => $this->availableYears,
+            'months' => $this->months,
+            'showManageModal' => $this->showManageModal,
+            'newPeriodInput' => $this->newPeriodInput,
         ]);
     }
 }

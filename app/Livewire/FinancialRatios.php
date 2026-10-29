@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On;
 use App\Models\FinancialRatio;
 use App\Models\Period;
 
@@ -23,11 +24,17 @@ class FinancialRatios extends Component
 
     public function mount()
     {
+        $this->selectedPeriod = request()->query('period') ?: session('bsc_period', '2026-10');
         if (request()->query('status')) {
             $this->selectedStatus = request()->query('status');
         }
-        if (request()->query('period')) {
-            $this->selectedPeriod = request()->query('period');
+    }
+
+    #[On('periodChanged')]
+    public function onPeriodChanged($period)
+    {
+        if ($period) {
+            $this->selectedPeriod = $period;
         }
     }
 
@@ -98,30 +105,42 @@ class FinancialRatios extends Component
 
     public function render()
     {
-        $periodObj = Period::where('period', $this->selectedPeriod)->first();
-        $isClosed = $periodObj ? $periodObj->isClosed() : false;
+        try {
+            $periodObj = Period::where('period', $this->selectedPeriod)->first();
+            $isClosed = $periodObj ? $periodObj->isClosed() : false;
 
-        $query = FinancialRatio::where('period', $this->selectedPeriod);
-        if ($this->selectedCategory) {
-            $query->where('category', $this->selectedCategory);
-        }
-        if ($this->selectedStatus) {
-            if ($this->selectedStatus === 'bermasalah') {
-                $query->whereIn('status', ['Waspada', 'Di Bawah Target', 'Off-Target']);
-            } else {
-                $query->where('status', $this->selectedStatus);
+            $query = FinancialRatio::where('period', $this->selectedPeriod);
+            if ($this->selectedCategory) {
+                $query->where('category', $this->selectedCategory);
             }
+            if ($this->selectedStatus) {
+                if ($this->selectedStatus === 'bermasalah') {
+                    $query->whereIn('status', ['Waspada', 'Di Bawah Target', 'Off-Target']);
+                } else {
+                    $query->where('status', $this->selectedStatus);
+                }
+            }
+            $ratios = $query->get();
+            $categories = FinancialRatio::distinct()->pluck('category')->toArray();
+            $periods = Period::pluck('period')->toArray();
+        } catch (\Throwable $e) {
+            $isClosed = false;
+            $ratios = collect();
+            $categories = ['Profitabilitas', 'Aktivitas', 'Produktivitas', 'Likuiditas', 'Solvabilitas'];
+            $periods = ['2026-10', '2026-09', '2026-08', '2025-10'];
         }
-        $ratios = $query->get();
-
-        $categories = FinancialRatio::distinct()->pluck('category')->toArray();
-        $periods = Period::pluck('period')->toArray();
 
         return view('livewire.financial-ratios', [
             'ratios' => $ratios,
             'categories' => $categories,
             'periods' => $periods,
             'isClosed' => $isClosed,
+            'editingRatioId' => $this->editingRatioId,
+            'editTarget' => $this->editTarget,
+            'editActual' => $this->editActual,
+            'selectedPeriod' => $this->selectedPeriod,
+            'selectedCategory' => $this->selectedCategory,
+            'selectedStatus' => $this->selectedStatus,
         ])->layout('layouts.app', ['title' => 'Rasio Keuangan']);
     }
 }

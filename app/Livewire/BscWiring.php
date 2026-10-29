@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On;
 use App\Models\FinancialRatio;
 use App\Models\DepartmentObjective;
 use App\Models\ActionPlan;
@@ -22,6 +23,19 @@ class BscWiring extends Component
     public $selectedUnit = 'all'; // Unit kerja filter
     public $hanyaBergeser = false; // Checkbox filter
 
+    public function mount()
+    {
+        $this->selectedPeriod = request()->query('period') ?: session('bsc_period', '2026-10');
+    }
+
+    #[On('periodChanged')]
+    public function onPeriodChanged($period)
+    {
+        if ($period) {
+            $this->selectedPeriod = $period;
+        }
+    }
+
     public function switchTab($tab)
     {
         $this->activeTab = $tab;
@@ -34,12 +48,19 @@ class BscWiring extends Component
 
     public function render()
     {
-        $periods = Period::pluck('period')->toArray();
-        $revenueDelta = round((($this->revenueActual - $this->revenueBaseline) / $this->revenueBaseline) * 100, 2);
+        try {
+            $periods = Period::pluck('period')->toArray();
+            $ratios = FinancialRatio::where('period', $this->selectedPeriod)->get();
+            $objectives = DepartmentObjective::where('period', $this->selectedPeriod)->get();
+            $actionPlans = ActionPlan::with('objective')->get();
+        } catch (\Throwable $e) {
+            $periods = ['2026-10', '2026-09', '2026-08', '2025-10'];
+            $ratios = collect();
+            $objectives = collect();
+            $actionPlans = collect();
+        }
 
-        $ratios = FinancialRatio::where('period', $this->selectedPeriod)->get();
-        $objectives = DepartmentObjective::where('period', $this->selectedPeriod)->get();
-        $actionPlans = ActionPlan::with('objective')->get();
+        $revenueDelta = round((($this->revenueActual - $this->revenueBaseline) / $this->revenueBaseline) * 100, 2);
 
         // Group objectives by department
         $objectivesByDept = $objectives->groupBy('dept_code');
@@ -272,6 +293,13 @@ class BscWiring extends Component
             'filteredDepartments' => $filteredDepartments,
             'deptCards' => $deptCards,
             'filteredDeptCards' => $filteredDeptCards,
+            'activeTab' => $this->activeTab,
+            'cascadeValue' => $this->cascadeValue,
+            'selectedUnit' => $this->selectedUnit,
+            'hanyaBergeser' => $this->hanyaBergeser,
+            'selectedPeriod' => $this->selectedPeriod,
+            'revenueBaseline' => $this->revenueBaseline,
+            'revenueActual' => $this->revenueActual,
         ])->layout('layouts.app', ['pageTitle' => 'Wiring / Peta Hubungan Transmisi Kaskade']);
     }
 }

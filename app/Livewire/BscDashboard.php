@@ -44,7 +44,11 @@ class BscDashboard extends Component
         $this->selectedPeriod = request()->query('period') ?: session('bsc_period', '2026-10');
         $this->viewMode = request()->query('mode') ?: session('bsc_mode', 'monthly');
 
-        $this->periods = Period::pluck('period')->toArray();
+        try {
+            $this->periods = Period::pluck('period')->toArray();
+        } catch (\Throwable $e) {
+            $this->periods = ['2026-10', '2026-09', '2026-08', '2025-10'];
+        }
         if (empty($this->periods)) {
             $this->periods = ['2026-10', '2026-09', '2026-08', '2025-10'];
         }
@@ -217,18 +221,22 @@ class BscDashboard extends Component
 
     public function render()
     {
-        $periodObj = Period::where('period', $this->selectedPeriod)->first();
-        $isClosed = $periodObj ? $periodObj->isClosed() : false;
+        try {
+            $periodObj = Period::where('period', $this->selectedPeriod)->first();
+            $isClosed = $periodObj ? $periodObj->isClosed() : false;
+            $ratios = FinancialRatio::where('period', $this->selectedPeriod)->get();
+            $objectives = DepartmentObjective::where('period', $this->selectedPeriod)->get();
+            $actionPlans = ActionPlan::with('objective')->get();
+        } catch (\Throwable $e) {
+            $periodObj = null;
+            $isClosed = false;
+            $ratios = collect();
+            $objectives = collect();
+            $actionPlans = collect();
+        }
 
-        $ratiosQuery = FinancialRatio::where('period', $this->selectedPeriod);
-        $ratios = $ratiosQuery->get();
         $avgRatioScore = $ratios->count() > 0 ? round($ratios->avg('achievement_pct'), 1) : 98.3;
-        
-        $objectivesQuery = DepartmentObjective::where('period', $this->selectedPeriod);
-        $objectives = $objectivesQuery->get();
         $avgObjScore = $objectives->count() > 0 ? round($objectives->avg('achievement_pct'), 1) : 93.5;
-
-        $actionPlans = ActionPlan::with('objective')->get();
         $avgActionProgress = $actionPlans->count() > 0 ? round($actionPlans->avg('progress_pct'), 1) : 72.0;
 
         // Parse Period year & month
@@ -310,6 +318,10 @@ class BscDashboard extends Component
 
         return view('livewire.bsc-dashboard', [
             'isClosed' => $isClosed,
+            'selectedPeriod' => $this->selectedPeriod,
+            'viewMode' => $this->viewMode,
+            'showModal' => $this->showModal,
+            'selectedItemDetail' => $this->selectedItemDetail,
             'apexScore' => $apexScore,
             'revenueScore' => $revenueScore,
             'avgRatioScore' => $avgRatioScore,
