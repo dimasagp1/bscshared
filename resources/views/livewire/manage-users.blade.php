@@ -1,201 +1,249 @@
-<div>
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6"><h1><i class="fas fa-users-cog mr-2"></i>Manage User</h1></div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Administrasi / Manage User</li>
-                    </ol>
+<div class="space-y-6">
+    <!-- Header Banner -->
+    <div class="bg-white rounded-3xl border border-gray-200 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-gray-100 text-gray-800 flex items-center justify-center text-xl shadow-xs">
+                <i class="fas fa-users-gear"></i>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-700">SUPER ADMIN</span>
+                    <h2 class="text-base font-bold text-gray-900">Manajemen Pengguna &amp; Akses Hak</h2>
                 </div>
+                <p class="text-xs text-gray-500 mt-0.5">
+                    Kelola otorisasi RBAC (Role-Based Access Control) 6 Peran &amp; 13 Menu Sistem Super Apps Herbatech Innopharma.
+                </p>
             </div>
         </div>
-    </section>
 
-    <section class="content">
-        <div class="container-fluid">
-            @if (session()->has('message'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="fas fa-check-circle mr-1"></i> {{ session('message') }}
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                </div>
-            @endif
-            @if (session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fas fa-exclamation-triangle mr-1"></i> {{ session('error') }}
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                </div>
-            @endif
-
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-sm">
-                                <input type="text" wire:model.live="search" class="form-control" placeholder="Cari nama / email...">
-                                <div class="input-group-append"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <select wire:model.live="filterRole" class="form-control form-control-sm">
-                                <option value="">Semua Role</option>
-                                @foreach($roles as $r)
-                                    <option value="{{ $r }}">{{ $r }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select wire:model.live="filterStatus" class="form-control form-control-sm">
-                                <option value="">Semua Status</option>
-                                <option value="active">Aktif</option>
-                                <option value="inactive">Nonaktif</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 text-right">
-                            <button wire:click="openCreate" class="btn btn-sm btn-primary"><i class="fas fa-plus mr-1"></i> Tambah User</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped mb-0">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th><th>Nama</th><th>Email</th><th>Role</th><th>Dept</th><th>Status</th><th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($users as $u)
-                                    <tr>
-                                        <td>{{ $loop->iteration + ($users->currentPage()-1)*$users->perPage() }}</td>
-                                        <td><strong>{{ $u->name }}</strong></td>
-                                        <td>{{ $u->email }}</td>
-                                        <td>
-                                            @foreach($u->roles as $rl)
-                                                <span class="badge 
-                                                    @if($rl->name=='Super Admin') badge-danger
-                                                    @elseif($rl->name=='Admin FAT') badge-info
-                                                    @elseif($rl->name=='Admin HRIS') badge-success
-                                                    @elseif($rl->name=='Kepala Departemen') badge-warning
-                                                    @elseif($rl->name=='Operator') badge-secondary
-                                                    @else badge-light border @endif
-                                                ">{{ $rl->name }}</span>
-                                            @endforeach
-                                        </td>
-                                        <td>{{ $u->dept_code ?? '-' }}</td>
-                                        <td>
-                                            @if($u->is_active)
-                                                <span class="badge badge-success">Aktif</span>
-                                            @else
-                                                <span class="badge badge-danger">Nonaktif</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group btn-group-sm">
-                                                <button wire:click="openEdit({{ $u->id }})" class="btn btn-outline-primary" title="Ubah"><i class="fas fa-edit"></i></button>
-                                                <button wire:click="toggleActive({{ $u->id }})" class="btn btn-outline-warning" title="{{ $u->is_active ? 'Nonaktifkan' : 'Aktifkan' }}">
-                                                    <i class="fas {{ $u->is_active ? 'fa-user-slash' : 'fa-user-check' }}"></i>
-                                                </button>
-                                                <button wire:click="confirmDelete({{ $u->id }})" class="btn btn-outline-danger" title="Hapus"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr><td colspan="7" class="text-center py-4 text-muted">Tidak ada pengguna.</td></tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                @if($users->hasPages())
-                <div class="card-footer clearfix">
-                    {{ $users->links() }}
-                </div>
-                @endif
-            </div>
-
-            <div class="callout callout-info">
-                <h6><i class="fas fa-shield-alt mr-1"></i> Pengaman</h6>
-                <p class="mb-0 small">Super Admin terakhir tidak dapat dihapus atau dinonaktifkan. Nonaktifkan = soft disable (tidak dapat login), bukan hard delete audit.</p>
-            </div>
-        </div>
-    </section>
-
-    {{-- Create/Edit Modal --}}
-    @if($showModal)
-    <div class="modal fade show d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title">{{ $isEdit ? 'Ubah Pengguna' : 'Tambah Pengguna Baru' }}</h5>
-                    <button type="button" class="close text-white" wire:click="closeModal"><span>&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nama *</label>
-                        <input type="text" wire:model="name" class="form-control @error('name') is-invalid @enderror">
-                        @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" wire:model="email" class="form-control @error('email') is-invalid @enderror">
-                        @error('email') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label>Password {{ $isEdit ? '(kosongkan jika tidak diubah)' : '*' }}</label>
-                        <input type="password" wire:model="password" class="form-control @error('password') is-invalid @enderror">
-                        @error('password') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>Role *</label>
-                            <select wire:model="role" class="form-control @error('role') is-invalid @enderror">
-                                @foreach($roles as $r)
-                                    <option value="{{ $r }}">{{ $r }}</option>
-                                @endforeach
-                            </select>
-                            @error('role') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Dept Code</label>
-                            <input type="text" wire:model="dept_code" placeholder="OPS, FIN, HRD..." class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" wire:model="is_active" class="custom-control-input" id="isActiveSwitch">
-                            <label class="custom-control-label" for="isActiveSwitch">{{ $is_active ? 'Aktif' : 'Nonaktif' }}</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button wire:click="closeModal" class="btn btn-secondary">Batal</button>
-                    <button wire:click="saveUser" class="btn btn-primary">{{ $isEdit ? 'Perbarui' : 'Simpan' }}</button>
-                </div>
-            </div>
-        </div>
+        <button wire:click="openCreate" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#166534] hover:bg-[#14532D] text-white text-xs font-bold transition-all shadow-xs">
+            <i class="fas fa-plus text-xs"></i>
+            <span>Tambah Pengguna</span>
+        </button>
     </div>
+
+    <!-- FLASH MESSAGES -->
+    @if(session()->has('message'))
+        <div class="rounded-xl bg-green-50 border border-green-200 p-3.5 text-xs text-green-800 flex items-center gap-2">
+            <i class="fas fa-check-circle text-green-600"></i>
+            <span>{{ session('message') }}</span>
+        </div>
+    @endif
+    @if(session()->has('error'))
+        <div class="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs text-red-800 flex items-center gap-2">
+            <i class="fas fa-exclamation-triangle text-red-600"></i>
+            <span>{{ session('error') }}</span>
+        </div>
     @endif
 
-    {{-- Delete Confirm --}}
-    @if($showDeleteModal)
-    <div class="modal fade show d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title">Konfirmasi Hapus</h5>
-                    <button type="button" class="close text-white" wire:click="cancelDelete"><span>&times;</span></button>
+    <!-- MAIN TABLE CARD -->
+    <div class="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-xs">
+        <!-- Filter Bar -->
+        <div class="p-5 border-b border-gray-100 flex flex-wrap items-center justify-between gap-3">
+            <div class="relative w-72">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                <input type="text" wire:model.live="search" placeholder="Cari nama atau email..." 
+                       class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-green-600 bg-gray-50/50">
+            </div>
+
+            <div class="flex items-center gap-2.5">
+                <!-- Filter Role -->
+                <select wire:model.live="filterRole" class="px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                    <option value="">Semua Peran (Role)</option>
+                    @foreach($roles as $r)
+                        <option value="{{ $r }}">{{ $r }}</option>
+                    @endforeach
+                </select>
+
+                <!-- Filter Status -->
+                <select wire:model.live="filterStatus" class="px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                    <option value="">Semua Status</option>
+                    <option value="active">Aktif</option>
+                    <option value="inactive">Nonaktif</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="bg-gray-50/70 border-b border-gray-100 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                        <th class="py-3 px-4 w-12">#</th>
+                        <th class="py-3 px-4">Nama Lengkap</th>
+                        <th class="py-3 px-4">Email</th>
+                        <th class="py-3 px-4">Role RBAC</th>
+                        <th class="py-3 px-4">Dept</th>
+                        <th class="py-3 px-4 text-center">Status</th>
+                        <th class="py-3 px-4 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @forelse($users as $u)
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="py-3.5 px-4 font-mono text-gray-400 text-[11px]">
+                                {{ $loop->iteration + ($users->currentPage()-1)*$users->perPage() }}
+                            </td>
+                            <td class="py-3.5 px-4 font-bold text-gray-900">
+                                {{ $u->name }}
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-gray-600">
+                                {{ $u->email }}
+                            </td>
+                            <td class="py-3.5 px-4">
+                                @foreach($u->roles as $rl)
+                                    <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold 
+                                        @if($rl->name=='Super Admin') bg-purple-100 text-purple-700 border border-purple-200
+                                        @elseif($rl->name=='Admin FAT') bg-blue-100 text-blue-700 border border-blue-200
+                                        @elseif($rl->name=='Admin HRIS') bg-amber-100 text-amber-700 border border-amber-200
+                                        @elseif($rl->name=='Kepala Departemen') bg-emerald-100 text-emerald-700 border border-emerald-200
+                                        @else bg-gray-100 text-gray-700 border border-gray-200 @endif">
+                                        {{ $rl->name }}
+                                    </span>
+                                @endforeach
+                            </td>
+                            <td class="py-3.5 px-4 font-mono text-gray-600">
+                                {{ $u->dept_code ?? '-' }}
+                            </td>
+                            <td class="py-3.5 px-4 text-center">
+                                @if($u->is_active)
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#DCFCE7] text-[#166534] border border-green-200 font-bold text-[10px]">
+                                        <i class="fas fa-check-circle text-[9px]"></i> Aktif
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FEE2E2] text-[#991B1B] border border-red-200 font-bold text-[10px]">
+                                        <i class="fas fa-times-circle text-[9px]"></i> Nonaktif
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="py-3.5 px-4 text-center">
+                                <div class="inline-flex items-center gap-1">
+                                    <button wire:click="openEdit({{ $u->id }})" class="p-1.5 rounded-lg text-gray-500 hover:text-[#166534] hover:bg-green-50 transition-colors" title="Ubah">
+                                        <i class="fas fa-pen text-xs"></i>
+                                    </button>
+                                    <button wire:click="toggleActive({{ $u->id }})" class="p-1.5 rounded-lg text-gray-500 hover:text-amber-600 hover:bg-amber-50 transition-colors" title="{{ $u->is_active ? 'Nonaktifkan' : 'Aktifkan' }}">
+                                        <i class="fas {{ $u->is_active ? 'fa-user-slash' : 'fa-user-check' }} text-xs"></i>
+                                    </button>
+                                    <button wire:click="confirmDelete({{ $u->id }})" class="p-1.5 rounded-lg text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors" title="Hapus">
+                                        <i class="fas fa-trash text-xs"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center text-gray-400 py-8 italic">Tidak ada pengguna ditemukan.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        @if($users->hasPages())
+            <div class="p-4 border-t border-gray-100">
+                {{ $users->links() }}
+            </div>
+        @endif
+    </div>
+
+    <!-- Security Note -->
+    <div class="p-4 rounded-2xl bg-gray-50 border border-gray-200 flex items-start gap-3 text-xs text-gray-600">
+        <i class="fas fa-shield-halved text-[#166534] text-base shrink-0 mt-0.5"></i>
+        <div>
+            <h4 class="font-bold text-gray-900">Kebijakan Perlindungan Super Admin</h4>
+            <p class="text-[11px] text-gray-500 mt-0.5 leading-relaxed">
+                Super Admin terakhir tidak dapat dihapus atau dinonaktifkan untuk mencegah lock-out sistem. Penonaktifan bersifat soft-disable (menutup akses login tanpa merusak jejak audit staging).
+            </p>
+        </div>
+    </div>
+
+    <!-- Create/Edit Modal -->
+    @if($showModal)
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
+            <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 text-left">
+                <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+                    <h3 class="text-base font-bold text-gray-900">
+                        {{ $isEdit ? 'Ubah Pengguna' : 'Tambah Pengguna Baru' }}
+                    </h3>
+                    <button wire:click="closeModal" class="text-gray-400 hover:text-gray-600 p-1">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <p>Yakin ingin menghapus pengguna ini? Aksi tidak dapat dibatalkan.</p>
+
+                <div class="space-y-4 text-xs">
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Nama *</label>
+                        <input type="text" wire:model="name" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600">
+                        @error('name') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Email *</label>
+                        <input type="email" wire:model="email" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600">
+                        @error('email') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Password {{ $isEdit ? '(kosongkan jika tidak diubah)' : '*' }}</label>
+                        <input type="password" wire:model="password" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600">
+                        @error('password') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">Role *</label>
+                            <select wire:model="role" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 bg-white">
+                                @foreach($roles as $r)
+                                    <option value="{{ $r }}">{{ $r }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">Kode Dept</label>
+                            <input type="text" wire:model="dept_code" placeholder="OPS, FIN, HRD..." class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-green-600 font-mono">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2">
+                        <input type="checkbox" id="isActiveSwitch" wire:model="is_active" class="w-4 h-4 rounded text-[#166534] accent-[#166534]">
+                        <label for="isActiveSwitch" class="font-bold text-gray-700 cursor-pointer">
+                            Pengguna Aktif (Dapat Login ke Sistem)
+                        </label>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button wire:click="cancelDelete" class="btn btn-secondary">Batal</button>
-                    <button wire:click="deleteUser" class="btn btn-danger">Ya, Hapus</button>
+
+                <div class="pt-4 mt-6 border-t border-gray-100 flex items-center justify-end gap-2">
+                    <button wire:click="closeModal" class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700">
+                        Batal
+                    </button>
+                    <button wire:click="saveUser" class="px-4 py-2 rounded-xl bg-[#166534] hover:bg-[#14532D] text-white text-xs font-bold">
+                        {{ $isEdit ? 'Perbarui Pengguna' : 'Simpan Pengguna' }}
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
+    <!-- Delete Modal -->
+    @if($showDeleteModal)
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
+            <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 text-center">
+                <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-3 text-lg">
+                    <i class="fas fa-trash"></i>
+                </div>
+                <h3 class="text-base font-bold text-gray-900 mb-1">Konfirmasi Hapus</h3>
+                <p class="text-xs text-gray-500 mb-5">
+                    Apakah Anda yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan.
+                </p>
+                <div class="flex items-center justify-center gap-2">
+                    <button wire:click="cancelDelete" class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700">
+                        Batal
+                    </button>
+                    <button wire:click="deleteUser" class="px-4 py-2 rounded-xl bg-[#DC2626] hover:bg-red-700 text-white text-xs font-bold">
+                        Ya, Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
     @endif
 </div>

@@ -1,28 +1,42 @@
-<div>
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6"><h1><i class="fas fa-tools mr-2 text-muted"></i>{{ $menuTitle }}</h1><small class="text-muted">{{ $frCode }}</small></div>
-                <div class="col-sm-6"><ol class="breadcrumb float-sm-right"><li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li><li class="breadcrumb-item active">{{ $menuTitle }}</li></ol></div>
-            </div>
+<div class="max-w-4xl mx-auto py-12 px-4">
+    <div class="bg-white rounded-3xl border border-gray-200 p-8 shadow-xs text-center flex flex-col items-center">
+        <!-- Squircle Icon Box -->
+        <div class="w-16 h-16 rounded-2xl bg-[#DCFCE7] text-[#166534] flex items-center justify-center text-2xl shadow-xs mb-4">
+            <i class="fas fa-hammer"></i>
         </div>
-    </section>
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card card-outline card-secondary">
-                <div class="card-body text-center py-5">
-                    <div class="mb-3"><i class="fas fa-hourglass-half fa-3x text-muted"></i></div>
-                    <h4 class="font-weight-bold">{{ $menuTitle }} — Segera Hadir</h4>
-                    <p class="text-muted mx-auto" style="max-width:600px;">{{ $menuDesc }}</p>
-                    <span class="badge badge-secondary">{{ $frCode }}</span>
-                    <div class="mt-3">
-                        <a href="{{ route('dashboard') }}" class="btn btn-teal btn-sm" style="background:#17a2b8; border-color:#17a2b8; color:#fff;"><i class="fas fa-arrow-left mr-1"></i> Kembali ke Dashboard</a>
-                    </div>
-                    @can('view dashboard')
-                    <small class="text-muted d-block mt-3">Anda memiliki akses view untuk menu ini. Konten akan diganti saat FR terealisasi.</small>
-                    @endcan
-                </div>
-            </div>
+
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 uppercase tracking-wider mb-2">
+            {{ $frCode }}
+        </span>
+
+        <h2 class="text-xl font-extrabold text-gray-900 mb-2">
+            {{ $menuTitle }} — Tahap Pengembangan
+        </h2>
+
+        <p class="text-sm text-gray-600 max-w-lg mb-6 leading-relaxed">
+            {{ $menuDesc }}
+        </p>
+
+        <div class="flex items-center gap-3">
+            <a href="{{ route('dashboard') }}" 
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#166534] hover:bg-[#14532D] text-white text-xs font-bold transition-all shadow-xs">
+                <i class="fas fa-arrow-left text-xs"></i>
+                <span>Kembali ke Dashboard Utama</span>
+            </a>
+            <a href="{{ route('department-objectives') }}" 
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold transition-all">
+                <i class="fas fa-bullseye text-xs text-[#166534]"></i>
+                <span>Lihat Sasaran Mutu</span>
+            </a>
         </div>
-    </section>
+
+        @can('view dashboard')
+            <div class="mt-8 pt-4 border-t border-gray-100 text-center">
+                <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-gray-500">
+                    <i class="fas fa-shield-check text-green-600"></i>
+                    Akses pengguna terverifikasi. Modul ini terhubung secara kaskade ke SSOT Engine Herbatech Innopharma.
+                </span>
+            </div>
+        @endcan
+    </div>
 </div>
