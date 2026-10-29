@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On;
 use App\Models\DepartmentObjective;
 use App\Models\Period;
 
@@ -28,11 +29,17 @@ class DepartmentObjectives extends Component
 
     public function mount()
     {
+        $this->selectedPeriod = request()->query('period') ?: session('bsc_period', '2026-10');
         if (request()->query('status')) {
             $this->selectedStatus = request()->query('status');
         }
-        if (request()->query('period')) {
-            $this->selectedPeriod = request()->query('period');
+    }
+
+    #[On('periodChanged')]
+    public function onPeriodChanged($period)
+    {
+        if ($period) {
+            $this->selectedPeriod = $period;
         }
     }
 

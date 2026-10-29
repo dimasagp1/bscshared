@@ -1,20 +1,40 @@
 <div class="space-y-5">
     
-    <!-- ALERT BANNER (REALISASI REVENUE MENCAPAI 7.72% DARI TARGET) -->
-    <div class="rounded-xl bg-[#FEF2F2] border border-[#FECACA] p-3.5 flex items-center justify-between text-xs font-medium text-red-700 shadow-xs">
-        <div class="flex items-center gap-2.5">
-            <i class="far fa-circle-exclamation text-red-600 text-sm"></i>
-            <span>
-                Realisasi revenue mencapai <strong>7.72%</strong> dari target. 
-                <a href="{{ route('bsc-wiring') }}" class="underline font-bold hover:text-red-900 transition-colors">
-                    Simulasikan kaskade di Menu 10.
-                </a>
-            </span>
+    @php
+        $apexFill = $revenueScore < 80 ? 'fill-[#FFF1F2]' : ($revenueScore < 100 ? 'fill-[#FFFBEB]' : 'fill-[#ECFDF5]');
+        $apexStroke = $revenueScore < 80 ? 'stroke-[#EF4444]' : ($revenueScore < 100 ? 'stroke-[#F59E0B]' : 'stroke-[#10B981]');
+        $apexTextColor = $revenueScore < 80 ? 'text-[#DC2626]' : ($revenueScore < 100 ? 'text-[#D97706]' : 'text-[#166534]');
+    @endphp
+
+    <!-- ALERT BANNER -->
+    @if($revenueScore < 80)
+        <div class="rounded-xl bg-[#FEF2F2] border border-[#FECACA] p-3.5 flex items-center justify-between text-xs font-medium text-red-700 shadow-xs">
+            <div class="flex items-center gap-2.5">
+                <i class="far fa-circle-exclamation text-red-600 text-sm"></i>
+                <span>
+                    Realisasi revenue mencapai <strong>{{ number_format($revenueScore, 2) }}%</strong> dari target {{ $viewMode === 'ytd' ? 'Akumulasi YTD' : '' }}. 
+                    <a href="{{ route('bsc-wiring') }}" class="underline font-bold hover:text-red-900 transition-colors">
+                        Simulasikan kaskade di Menu 10.
+                    </a>
+                </span>
+            </div>
+            <button type="button" class="text-red-400 hover:text-red-700">
+                <i class="fas fa-times text-xs"></i>
+            </button>
         </div>
-        <button type="button" class="text-red-400 hover:text-red-700">
-            <i class="fas fa-times text-xs"></i>
-        </button>
-    </div>
+    @else
+        <div class="rounded-xl bg-amber-50 border border-amber-200 p-3.5 flex items-center justify-between text-xs font-medium text-amber-800 shadow-xs">
+            <div class="flex items-center gap-2.5">
+                <i class="fas fa-circle-info text-amber-600 text-sm"></i>
+                <span>
+                    Realisasi revenue {{ $viewMode === 'ytd' ? 'Akumulasi YTD' : 'Bulan Berjalan' }} mencapai <strong>{{ number_format($revenueScore, 1) }}%</strong> dari target. 
+                    <a href="{{ route('bsc-wiring') }}" class="underline font-bold hover:text-amber-900 transition-colors">
+                        Simulasikan kaskade di Menu 10.
+                    </a>
+                </span>
+            </div>
+        </div>
+    @endif
 
     <!-- FLASH MESSAGES -->
     @if(session()->has('message'))
@@ -79,18 +99,26 @@
                 <div class="mt-4 px-3.5 py-2 rounded-xl bg-gray-50/70 border border-gray-100 flex items-center justify-between text-xs">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
-                        <span class="font-bold text-[#166534]">Mode Tampilan: Bulan Berjalan ({{ $selectedPeriod }})</span>
+                        <span class="font-bold text-[#166534]">
+                            Mode Tampilan: {{ $viewMode === 'ytd' ? 'Akumulasi YTD (Jan – ' . $monthShort . ' ' . $year . ')' : 'Bulan Berjalan (' . $selectedPeriod . ')' }}
+                        </span>
                     </div>
                     <div class="font-mono text-gray-600 text-[11px]">
-                        Target: <span class="font-bold text-gray-900">Rp {{ number_format($targetRevenueM, 2) }} M</span> | 
-                        Realisasi: <span class="font-bold text-gray-900">Rp {{ number_format($actualRevenueJt, 1) }} Jt</span>
+                        Target: <span class="font-bold text-gray-900">Rp {{ number_format($activeTargetM, 2) }} M</span> | 
+                        Realisasi: <span class="font-bold text-gray-900">
+                            @if($viewMode === 'ytd' || $activeActualM >= 1.0)
+                                Rp {{ number_format($activeActualM, 2) }} M
+                            @else
+                                Rp {{ number_format($activeActualM * 1000, 1) }} Jt
+                            @endif
+                        </span>
                     </div>
                 </div>
 
                 <!-- Centered Badge Above Apex -->
                 <div class="text-center mt-6 mb-3">
                     <span class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-green-50 border border-green-300 text-xs font-semibold text-[#166534] shadow-xs">
-                        Bobot <strong class="text-green-800">100%</strong> Revenue (Pencapaian Bulanan)
+                        Bobot <strong class="text-green-800">100%</strong> Revenue ({{ $viewMode === 'ytd' ? 'Pencapaian Akumulatif YTD' : 'Pencapaian Bulanan' }})
                     </span>
                 </div>
 
@@ -101,7 +129,7 @@
                     <svg viewBox="0 0 500 370" class="w-full h-auto drop-shadow-xs select-none">
                         <!-- TIER 1: APEX REVENUE (Segitiga Lancip Puncak) -->
                         <polygon points="250,15 320,95 180,95" 
-                                 class="fill-[#FFF1F2] stroke-[#EF4444] stroke-[1.5] transition-all duration-150 hover:fill-[#FFE4E6] cursor-pointer"
+                                 class="{{ $apexFill }} {{ $apexStroke }} stroke-[1.5] transition-all duration-150 hover:opacity-90 cursor-pointer"
                                  wire:click="selectLevel(1)" />
 
                         <!-- TIER 2: RASIO KEUANGAN (Trapesium Atas) -->
@@ -128,9 +156,9 @@
                              wire:click="selectLevel(1)">
                             <div class="w-4 h-4 rounded-full bg-gray-900 text-white text-[9px] font-bold flex items-center justify-center mb-0.5">L1</div>
                             <span class="text-[10px] font-extrabold uppercase tracking-wider text-gray-900 leading-tight">REVENUE</span>
-                            <span class="text-base font-extrabold text-[#DC2626] leading-none my-0.5">{{ number_format($revenueScore, 1) }}%</span>
+                            <span class="text-base font-extrabold {{ $apexTextColor }} leading-none my-0.5">{{ number_format($revenueScore, 1) }}%</span>
                             <div class="flex items-center gap-1 text-[9px]">
-                                <span class="text-[#DC2626] font-medium">Di Bawah Target</span>
+                                <span class="{{ $apexTextColor }} font-medium">{{ $activeStatus }}</span>
                                 <span class="text-teal-700 font-bold hover:underline">Detail &gt;</span>
                             </div>
                         </div>
@@ -148,8 +176,8 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <span class="text-xl font-extrabold text-[#D97706] block leading-none">{{ number_format($avgRatioScore, 1) }}%</span>
-                                <span class="text-[10px] text-teal-700 font-bold hover:underline">Telusuri &gt;</span>
+                                <span class="text-base font-extrabold text-[#D97706]">{{ number_format($avgRatioScore, 1) }}%</span>
+                                <span class="text-[10px] font-bold text-teal-700 block hover:underline">Telusuri &gt;</span>
                             </div>
                         </div>
 
@@ -166,13 +194,13 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <span class="text-xl font-extrabold text-[#D97706] block leading-none">{{ number_format($avgObjScore, 1) }}%</span>
-                                <span class="text-[10px] text-teal-700 font-bold hover:underline">Telusuri &gt;</span>
+                                <span class="text-base font-extrabold text-[#D97706]">{{ number_format($avgObjScore, 1) }}%</span>
+                                <span class="text-[10px] font-bold text-teal-700 block hover:underline">Telusuri &gt;</span>
                             </div>
                         </div>
 
                         <!-- TIER 4 CONTENT OVERLAY -->
-                        <div class="absolute top-[305px] inset-x-0 px-8 flex items-center justify-between pointer-events-auto cursor-pointer"
+                        <div class="absolute top-[305px] inset-x-0 px-10 flex items-center justify-between pointer-events-auto cursor-pointer"
                              wire:click="selectLevel(4)">
                             <div class="flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-gray-900 text-white text-[9px] font-bold flex items-center justify-center">L4</div>
@@ -184,8 +212,8 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <span class="text-xl font-extrabold text-[#DC2626] block leading-none">{{ number_format($avgActionProgress, 1) }}%</span>
-                                <span class="text-[10px] text-teal-700 font-bold hover:underline">Telusuri &gt;</span>
+                                <span class="text-base font-extrabold text-[#DC2626]">{{ number_format($avgActionProgress, 1) }}%</span>
+                                <span class="text-[10px] font-bold text-teal-700 block hover:underline">Telusuri &gt;</span>
                             </div>
                         </div>
 
@@ -196,7 +224,7 @@
         </div>
 
         <!-- KOLOM KANAN: 3 KARTU DIAGNOSTIK (col-span-5) -->
-        <div class="lg:col-span-5 space-y-5">
+        <div class="lg:col-span-5 space-y-4">
             
             <!-- KARTU 1: KESEHATAN TINGKATAN -->
             <div class="bg-white rounded-3xl border border-gray-200 p-6 shadow-xs">
@@ -214,21 +242,23 @@
                 <div class="space-y-2.5">
                     <!-- Level 1 -->
                     <div wire:click="selectLevel(1)" 
-                         class="p-3 rounded-2xl border border-rose-100 bg-rose-50/40 hover:bg-rose-50 flex items-center justify-between cursor-pointer transition-colors">
+                         class="p-3 rounded-2xl border {{ $revenueScore < 80 ? 'border-rose-100 bg-rose-50/40 hover:bg-rose-50' : 'border-amber-100 bg-amber-50/40 hover:bg-amber-50' }} flex items-center justify-between cursor-pointer transition-colors">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-rose-100 text-[#DC2626] flex items-center justify-center text-xs">
+                            <div class="w-8 h-8 rounded-xl {{ $revenueScore < 80 ? 'bg-rose-100 text-[#DC2626]' : 'bg-amber-100 text-[#D97706]' }} flex items-center justify-center text-xs">
                                 <i class="fas fa-arrow-trend-up"></i>
                             </div>
                             <div>
                                 <div class="flex items-center gap-1.5">
                                     <span class="text-xs font-bold text-gray-900">Level 1: REVENUE</span>
-                                    <span class="bg-gray-100 text-gray-600 text-[9px] px-1 py-0.2 rounded font-medium">Bulanan</span>
+                                    <span class="bg-gray-100 text-gray-600 text-[9px] px-1 py-0.2 rounded font-medium">
+                                        {{ $viewMode === 'ytd' ? 'Akumulasi YTD' : 'Bulanan' }}
+                                    </span>
                                 </div>
-                                <span class="text-[11px] text-[#DC2626] font-medium block">Status: Di Bawah Target</span>
+                                <span class="text-[11px] {{ $apexTextColor }} font-medium block">Status: {{ $activeStatus }}</span>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-sm font-extrabold text-[#DC2626]">{{ number_format($revenueScore, 1) }}%</span>
+                            <span class="text-sm font-extrabold {{ $apexTextColor }}">{{ number_format($revenueScore, 1) }}%</span>
                             <i class="fas fa-chevron-right text-xs text-gray-300"></i>
                         </div>
                     </div>
@@ -289,17 +319,17 @@
                 </div>
             </div>
 
-            <!-- KARTU 2: RINGKASAN INDIKATOR (BULANAN) - 2X2 GRID METRIK -->
+            <!-- KARTU 2: RINGKASAN INDIKATOR (2X2 GRID METRIK) -->
             <div class="bg-white rounded-3xl border border-gray-200 p-6 shadow-xs">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-gray-800 mb-4">
-                    RINGKASAN INDIKATOR (BULANAN)
+                    RINGKASAN INDIKATOR ({{ $viewMode === 'ytd' ? 'AKUMULATIF YTD' : 'BULANAN' }})
                 </h3>
 
                 <div class="grid grid-cols-2 gap-3.5">
                     <!-- Tile 1 -->
                     <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/50">
-                        <span class="text-[11px] font-medium text-gray-500 block mb-1">Skor Revenue (Bulan Ini)</span>
-                        <span class="text-2xl font-extrabold text-teal-700 font-mono">{{ number_format($revenueScore, 1) }}%</span>
+                        <span class="text-[11px] font-medium text-gray-500 block mb-1">Skor Revenue ({{ $viewMode === 'ytd' ? 'YTD' : 'Bulan Ini' }})</span>
+                        <span class="text-2xl font-extrabold {{ $apexTextColor }} font-mono">{{ number_format($revenueScore, 1) }}%</span>
                     </div>
 
                     <!-- Tile 2 -->
@@ -311,13 +341,13 @@
                     <!-- Tile 3 -->
                     <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/50">
                         <span class="text-[11px] font-medium text-gray-500 block mb-1">Skor Puncak Apex</span>
-                        <span class="text-2xl font-extrabold text-teal-700 font-mono">{{ number_format($apexScore, 1) }}%</span>
+                        <span class="text-2xl font-extrabold {{ $apexTextColor }} font-mono">{{ number_format($apexScore, 1) }}%</span>
                     </div>
 
                     <!-- Tile 4 -->
                     <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/50">
                         <span class="text-[11px] font-medium text-gray-500 block mb-1">Status Capaian</span>
-                        <span class="text-xl font-extrabold text-[#DC2626] block">Di Bawah</span>
+                        <span class="text-xl font-extrabold {{ $apexTextColor }} block">{{ $activeStatus }}</span>
                     </div>
                 </div>
             </div>
@@ -341,7 +371,11 @@
 
                 <!-- Formula Monospace Code Box -->
                 <div class="p-3 rounded-xl bg-gray-50 border border-gray-100 font-mono text-xs text-gray-800 font-semibold mb-2">
-                    Apex Score (Bulanan) = <strong class="text-green-700">100%</strong> &times; (Actual &divide; Target)
+                    @if($viewMode === 'ytd')
+                        Apex Score (Akumulatif YTD) = <strong class="text-green-700">100%</strong> &times; (Total Realisasi YTD &divide; Total Target YTD)
+                    @else
+                        Apex Score (Bulanan) = <strong class="text-green-700">100%</strong> &times; (Actual &divide; Target)
+                    @endif
                 </div>
 
                 <p class="text-[11px] text-gray-500 leading-relaxed">

@@ -273,71 +273,8 @@
             </div>
         </header>
 
-        <!-- SUBBAR PERIOD FILTER & TIMELINE MONTHS (SHARED HORIZONTAL CONTROL) -->
-        <div class="bg-white border-b border-gray-200 px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <!-- Left Controls: Periodic Monitor & Month Dropdown & Month Quick-Pills -->
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#DCFCE7] text-[#166534] font-bold text-[11px]">
-                    <i class="far fa-calendar text-[11px]"></i>
-                    <span>PERIODIC MONITOR</span>
-                </span>
-
-                <!-- Dropdown Tahun -->
-                <div class="px-2.5 py-1 rounded-lg border border-gray-200 font-semibold text-gray-800 flex items-center gap-1 cursor-pointer">
-                    <span>Tahun: <strong>2026</strong></span>
-                    <i class="fas fa-chevron-down text-[9px] text-gray-400"></i>
-                </div>
-
-                <!-- Dropdown Bulan Aktif -->
-                <div class="px-2.5 py-1 rounded-lg border border-gray-200 font-semibold text-gray-800 flex items-center gap-1.5 cursor-pointer">
-                    <span>Bulan: <strong>Oktober (10)</strong></span>
-                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                    <i class="fas fa-chevron-down text-[9px] text-gray-400"></i>
-                </div>
-
-                <!-- Horizontal Months Timeline Pills -->
-                <div class="flex items-center gap-1 ml-1 text-gray-600 font-medium">
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Jan •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Feb •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Mar •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Apr •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Mei •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Jun •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Jul •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Agu •</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Sep •</span>
-                    <span class="px-2.5 py-0.5 rounded bg-[#166534] text-white font-bold shadow-xs cursor-pointer">Okt</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Nov</span>
-                    <span class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100">Des</span>
-                </div>
-            </div>
-
-            <!-- Right Controls: View Switcher (Per Bulan vs YTD) -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-[11px] font-semibold">
-                    <button type="button" class="px-2.5 py-1 rounded-md bg-white text-gray-900 shadow-xs flex items-center gap-1.5">
-                        <i class="far fa-calendar"></i>
-                        <span>Per Bulan</span>
-                    </button>
-                    <button type="button" class="px-2.5 py-1 rounded-md text-gray-600 hover:text-gray-900 flex items-center gap-1.5">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Akumulatif (YTD)</span>
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-1 text-[11px]">
-                    <span class="px-2 py-1 rounded border border-gray-200 bg-gray-50 text-gray-700 font-mono">
-                        <i class="far fa-clock mr-1"></i> Tahun Lalu: <strong>2025-10</strong>
-                    </span>
-                    <button type="button" class="px-2 py-1 rounded border border-gray-200 bg-white hover:bg-gray-50" title="Bandingkan">
-                        <i class="fas fa-arrow-right-arrow-left text-[10px]"></i>
-                    </button>
-                    <button type="button" class="px-2.5 py-1 rounded border border-gray-200 bg-white hover:bg-gray-50 font-bold" title="Kelola Periode">
-                        + Kelola
-                    </button>
-                </div>
-            </div>
-        </div>
+        <!-- SUBBAR PERIOD FILTER & TIMELINE MONTHS (SHARED LIVEWIRE HORIZONTAL CONTROL) -->
+        <livewire:periodic-monitor />
 
         <!-- MAIN PAGE SLOT CONTENT (DASHBOARD, OBJECTIVES, WIRING, ETC) -->
         <main class="flex-1 p-6">

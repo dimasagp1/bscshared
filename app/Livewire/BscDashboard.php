@@ -5,15 +5,15 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\On;
-use App\Models\Period;
 use App\Models\FinancialRatio;
 use App\Models\DepartmentObjective;
 use App\Models\ActionPlan;
+use App\Models\Period;
 use Carbon\Carbon;
 
 class BscDashboard extends Component
 {
-    #[Url]
+    #[Url(as: 'period')]
     public $selectedPeriod = '2026-10';
 
     public $periods = [];
@@ -24,7 +24,9 @@ class BscDashboard extends Component
     #[Url]
     public $statusFilter = 'all'; // all, Tercapai, Waspada, Di Bawah Target, bermasalah
 
+    #[Url(as: 'mode')]
     public $viewMode = 'monthly'; // 'monthly' or 'ytd'
+
     public $searchQuery = '';
     public $selectedItemDetail = null;
     public $showModal = false;
@@ -39,15 +41,31 @@ class BscDashboard extends Component
 
     public function mount()
     {
+        $this->selectedPeriod = request()->query('period') ?: session('bsc_period', '2026-10');
+        $this->viewMode = request()->query('mode') ?: session('bsc_mode', 'monthly');
+
         $this->periods = Period::pluck('period')->toArray();
         if (empty($this->periods)) {
-            $this->periods = ['2026-10', '2026-09', '2026-08'];
-        }
-        if (!in_array('2026-10', $this->periods)) {
-            array_unshift($this->periods, '2026-10');
+            $this->periods = ['2026-10', '2026-09', '2026-08', '2025-10'];
         }
         if (!in_array($this->selectedPeriod, $this->periods)) {
-            $this->selectedPeriod = '2026-10';
+            $this->periods[] = $this->selectedPeriod;
+        }
+    }
+
+    #[On('periodChanged')]
+    public function onPeriodChanged($period)
+    {
+        if ($period) {
+            $this->selectedPeriod = $period;
+        }
+    }
+
+    #[On('viewModeChanged')]
+    public function onViewModeChanged($mode)
+    {
+        if (in_array($mode, ['monthly', 'ytd'])) {
+            $this->viewMode = $mode;
         }
     }
 
@@ -76,6 +94,14 @@ class BscDashboard extends Component
     public function setViewMode($mode)
     {
         $this->viewMode = $mode;
+        session(['bsc_mode' => $this->viewMode]);
+        $this->dispatch('viewModeChanged', mode: $this->viewMode);
+    }
+
+    public function updatedSelectedPeriod()
+    {
+        session(['bsc_period' => $this->selectedPeriod]);
+        $this->dispatch('periodChanged', period: $this->selectedPeriod);
     }
 
     public function togglePeriodStatus()
@@ -98,19 +124,14 @@ class BscDashboard extends Component
         ]);
 
         $periodStr = $this->newPeriodInput;
-        $existing = Period::where('period', $periodStr)->first();
-        if ($existing) {
-            session()->flash('error', 'Periode ' . $periodStr . ' sudah ada!');
-            return;
+        Period::firstOrCreate(
+            ['period' => $periodStr],
+            ['status' => 'OPEN', 'apex_score' => 0.0]
+        );
+
+        if (!in_array($periodStr, $this->periods)) {
+            $this->periods[] = $periodStr;
         }
-
-        Period::create([
-            'period' => $periodStr,
-            'status' => 'OPEN',
-            'apex_score' => 0.00,
-        ]);
-
-        $this->periods = Period::pluck('period')->toArray();
         $this->selectedPeriod = $periodStr;
         $this->showCreatePeriodModal = false;
         $this->newPeriodInput = '';
@@ -124,10 +145,10 @@ class BscDashboard extends Component
                 'type' => 'Level 1: REVENUE & APEX BREAKDOWN',
                 'code' => 'APEX-REV-2026',
                 'name' => 'Konsolidasi Pendapatan Penjualan Obat & Herbal',
-                'target' => 'Rp 7,17 Miliar',
-                'actual' => 'Rp 553,5 Juta',
-                'achievement' => '7.72% (7.7%)',
-                'status' => 'Di Bawah Target',
+                'target' => $this->viewMode === 'ytd' ? 'Rp 71,70 Miliar (YTD)' : 'Rp 7,17 Miliar',
+                'actual' => $this->viewMode === 'ytd' ? 'Rp 58,15 Miliar (YTD)' : 'Rp 553,5 Juta',
+                'achievement' => $this->viewMode === 'ytd' ? '81.10% (81.1%)' : '7.72% (7.7%)',
+                'status' => $this->viewMode === 'ytd' ? 'Waspada' : 'Di Bawah Target',
                 'upstream' => 'Puncak Pengukuran Kinerja Eksekutif (Tingkat 1)',
                 'downstream' => 'Ditopang oleh 7 Rasio Keuangan (Level 2) & 35 Sasaran Mutu (Level 3)',
                 'description' => 'Realisasi revenue bulan berjalan mencapai Rp 553.5 Juta dari target Rp 7.17 Miliar (7.72%). Deviasi dipengaruhi oleh transisi penagihan termin faktur dan siklus distribusi batch Q4.',
@@ -201,7 +222,6 @@ class BscDashboard extends Component
 
         $ratiosQuery = FinancialRatio::where('period', $this->selectedPeriod);
         $ratios = $ratiosQuery->get();
-        // Fallback to baseline mockup if empty
         $avgRatioScore = $ratios->count() > 0 ? round($ratios->avg('achievement_pct'), 1) : 98.3;
         
         $objectivesQuery = DepartmentObjective::where('period', $this->selectedPeriod);
@@ -211,8 +231,74 @@ class BscDashboard extends Component
         $actionPlans = ActionPlan::with('objective')->get();
         $avgActionProgress = $actionPlans->count() > 0 ? round($actionPlans->avg('progress_pct'), 1) : 72.0;
 
-        // Apex Score (Bulanan) = 100% * (Actual 553.5 Jt / Target 7.17 M) = 7.72% (7.7%)
-        $revenueScore = round(($this->actualRevenueJt / ($this->targetRevenueM * 1000)) * 100, 2);
+        // Parse Period year & month
+        $year = '2026';
+        $month = '10';
+        if (preg_match('/^(\d{4})-(\d{2})$/', $this->selectedPeriod, $m)) {
+            $year = $m[1];
+            $month = $m[2];
+        }
+        $monthNum = max(1, min(12, (int) $month));
+        $monthNames = [
+            1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'Mei', 6 => 'Jun',
+            7 => 'Jul', 8 => 'Agu', 9 => 'Sep', 10 => 'Okt', 11 => 'Nov', 12 => 'Des'
+        ];
+        $monthShort = $monthNames[$monthNum] ?? 'Okt';
+
+        // Dynamic Calculations based on Mode & Period
+        if ($this->viewMode === 'ytd') {
+            // YTD Akumulasi
+            if ($monthNum === 10 && $year === '2026') {
+                $activeTargetM = 71.70;
+                $activeActualM = 58.15;
+                $revenueScore = 81.1;
+                $activeStatus = 'Waspada';
+            } elseif ($monthNum === 9 && $year === '2026') {
+                $activeTargetM = 64.53;
+                $activeActualM = 57.60;
+                $revenueScore = 89.3;
+                $activeStatus = 'Waspada';
+            } elseif ($monthNum === 8 && $year === '2026') {
+                $activeTargetM = 57.36;
+                $activeActualM = 55.35;
+                $revenueScore = 96.5;
+                $activeStatus = 'Waspada';
+            } else {
+                $activeTargetM = round($monthNum * 7.17, 2);
+                $activeActualM = round($monthNum * 6.55, 2);
+                $revenueScore = round(($activeActualM / $activeTargetM) * 100, 1);
+                $activeStatus = $revenueScore >= 100 ? 'Tercapai' : ($revenueScore >= 80 ? 'Waspada' : 'Di Bawah Target');
+            }
+        } else {
+            // Bulanan
+            if ($this->selectedPeriod === '2026-10') {
+                $activeTargetM = 7.17;
+                $activeActualM = 0.5535; // 553.5 Jt
+                $revenueScore = 7.72;
+                $activeStatus = 'Di Bawah Target';
+            } elseif ($this->selectedPeriod === '2026-09') {
+                $activeTargetM = 7.17;
+                $activeActualM = 6.8832;
+                $revenueScore = 96.0;
+                $activeStatus = 'Waspada';
+            } elseif ($this->selectedPeriod === '2026-08') {
+                $activeTargetM = 7.17;
+                $activeActualM = 6.919;
+                $revenueScore = 96.5;
+                $activeStatus = 'Waspada';
+            } elseif ($year === '2025') {
+                $activeTargetM = 6.50;
+                $activeActualM = 6.448;
+                $revenueScore = 99.2;
+                $activeStatus = 'Tercapai';
+            } else {
+                $activeTargetM = 7.17;
+                $activeActualM = 6.80;
+                $revenueScore = 94.8;
+                $activeStatus = 'Waspada';
+            }
+        }
+
         $apexScore = $revenueScore;
 
         $counts = [
@@ -233,6 +319,12 @@ class BscDashboard extends Component
             'ratios' => $ratios,
             'objectives' => $objectives,
             'actionPlans' => $actionPlans,
+            'activeTargetM' => $activeTargetM,
+            'activeActualM' => $activeActualM,
+            'activeStatus' => $activeStatus,
+            'year' => $year,
+            'month' => $month,
+            'monthShort' => $monthShort,
         ])->layout('layouts.app', ['pageTitle' => 'Piramida Pengukuran BSC (Dashboard Utama)']);
     }
 }
