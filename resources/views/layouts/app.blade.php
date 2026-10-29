@@ -290,7 +290,7 @@
     <!-- LOGOUT CONFIRMATION MODAL -->
     <div x-show="logoutModalOpen" 
          x-cloak
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div @click.away="logoutModalOpen = false" 
              class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 text-center animate-in fade-in zoom-in-95 duration-150">
             <div class="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto mb-3 text-lg">

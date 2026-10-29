@@ -388,7 +388,8 @@
 
     <!-- DETAIL DRILLDOWN MODAL -->
     @if($showModal && $selectedItemDetail)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs animate-in fade-in duration-150">
+        <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
+             wire:click.self="closeModal">
             <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 text-left">
                 <!-- Modal Header -->
                 <div class="flex items-start justify-between pb-3 border-b border-gray-100 mb-4">

@@ -159,7 +159,8 @@
 
     <!-- Create/Edit Modal -->
     @if($showModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
+        <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
+             wire:click.self="closeModal">
             <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 text-left">
                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
                     <h3 class="text-base font-bold text-gray-900">
@@ -226,7 +227,8 @@
 
     <!-- Delete Modal -->
     @if($showDeleteModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
+        <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
+             wire:click.self="closeModal">
             <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 text-center">
                 <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-3 text-lg">
                     <i class="fas fa-trash"></i>

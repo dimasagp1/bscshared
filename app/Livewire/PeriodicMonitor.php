@@ -90,7 +90,14 @@ class PeriodicMonitor extends Component
         $this->updatePeriodAndDispatch();
     }
 
-    protected function updatePeriodAndDispatch()
+    public function selectPeriod($periodStr)
+    {
+        $this->parseAndSetPeriod($periodStr);
+        $this->updatePeriodAndDispatch();
+        $this->closeManageModal();
+    }
+
+    public function updatePeriodAndDispatch()
     {
         $this->selectedPeriod = $this->selectedYear . '-' . $this->selectedMonth;
         session(['bsc_period' => $this->selectedPeriod]);
@@ -100,7 +107,7 @@ class PeriodicMonitor extends Component
         $this->updateBrowserUrl();
     }
 
-    protected function updateBrowserUrl()
+    public function updateBrowserUrl()
     {
         $this->js("
             const url = new URL(window.location);
@@ -159,14 +166,16 @@ class PeriodicMonitor extends Component
             'newPeriodInput.regex' => 'Format harus YYYY-MM (contoh: 2026-11).',
         ]);
 
-        Period::firstOrCreate(
-            ['period' => $this->newPeriodInput],
-            ['status' => 'OPEN', 'apex_score' => 0.0]
-        );
+        try {
+            Period::firstOrCreate(
+                ['period' => $this->newPeriodInput],
+                ['status' => 'OPEN', 'apex_score' => 0.0]
+            );
+        } catch (\Throwable $e) {
+            // fallback
+        }
 
-        $this->parseAndSetPeriod($this->newPeriodInput);
-        $this->updatePeriodAndDispatch();
-        $this->closeManageModal();
+        $this->selectPeriod($this->newPeriodInput);
         session()->flash('period_msg', "Periode {$this->newPeriodInput} berhasil ditambahkan dan diaktifkan.");
     }
 

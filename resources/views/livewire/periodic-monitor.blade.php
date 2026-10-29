@@ -1,4 +1,4 @@
-<div class="bg-white border-b border-gray-200 px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs relative z-10">
+<div class="bg-white border-b border-gray-200 px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs relative {{ $showManageModal ? 'z-[60]' : 'z-10' }}">
     
     <!-- LEFT CONTROLS: PERIODIC MONITOR BADGE, TAHUN DROPDOWN, BULAN DROPDOWN, 12 MONTH PILLS -->
     <div class="flex flex-wrap items-center gap-2">
@@ -142,8 +142,9 @@
 
     <!-- MODAL POPUP KELOLA PERIODE -->
     @if($showManageModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
-            <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 text-left">
+        <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
+             wire:click.self="closeManageModal">
+            <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 text-left relative z-10 animate-in zoom-in-95 duration-150">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
                     <div class="flex items-center gap-2">
@@ -203,8 +204,8 @@
                                 </button>
                                 @if($p->period !== $selectedPeriod)
                                     <button type="button" 
-                                            wire:click="parseAndSetPeriod('{{ $p->period }}'); updatePeriodAndDispatch(); closeManageModal();" 
-                                            class="px-2 py-1 rounded-lg text-[10px] font-bold bg-[#166534] text-white hover:bg-[#14532D] transition-colors">
+                                            wire:click="selectPeriod('{{ $p->period }}')" 
+                                            class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-[#166534] text-white hover:bg-[#14532D] transition-colors">
                                         Pilih
                                     </button>
                                 @endif
