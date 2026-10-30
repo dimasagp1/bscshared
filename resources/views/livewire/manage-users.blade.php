@@ -1,8 +1,8 @@
 <div class="space-y-6">
     <!-- Header Banner -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200 flex items-center justify-center text-xl shadow-xs">
+            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-[#18181A] border border-transparent dark:border-[#242328] text-gray-800 dark:text-slate-200 flex items-center justify-center text-xl shadow-xs">
                 <i class="fas fa-users-gear"></i>
             </div>
             <div>
@@ -37,18 +37,18 @@
     @endif
 
     <!-- MAIN TABLE CARD -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-xs transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] overflow-hidden shadow-xs transition-colors duration-200">
         <!-- Filter Bar -->
-        <div class="p-5 border-b border-gray-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        <div class="p-5 border-b border-gray-100 dark:border-[#1F2026] flex flex-wrap items-center justify-between gap-3">
             <div class="relative w-72">
                 <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 text-xs"></i>
                 <input type="text" wire:model.live="search" placeholder="Cari nama atau email..." 
-                       class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-slate-700 text-xs focus:outline-none focus:ring-1 focus:ring-green-600 bg-gray-50/50 dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500">
+                       class="w-full pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-[#242328] text-xs focus:outline-none focus:ring-1 focus:ring-green-600 bg-gray-50/50 dark:bg-[#18181A] text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500">
             </div>
 
             <div class="flex items-center gap-2.5">
                 <!-- Filter Role -->
-                <select wire:model.live="filterRole" class="px-3 py-1.5 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none">
+                <select wire:model.live="filterRole" class="px-3 py-1.5 rounded-xl border border-gray-200 dark:border-[#242328] text-xs font-semibold text-gray-700 dark:text-slate-200 bg-white dark:bg-[#18181A] hover:bg-gray-50 dark:hover:bg-[#242328] focus:outline-none">
                     <option value="">Semua Peran (Role)</option>
                     @foreach($roles as $r)
                         <option value="{{ $r }}">{{ $r }}</option>
@@ -56,7 +56,7 @@
                 </select>
 
                 <!-- Filter Status -->
-                <select wire:model.live="filterStatus" class="px-3 py-1.5 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none">
+                <select wire:model.live="filterStatus" class="px-3 py-1.5 rounded-xl border border-gray-200 dark:border-[#242328] text-xs font-semibold text-gray-700 dark:text-slate-200 bg-white dark:bg-[#18181A] hover:bg-gray-50 dark:hover:bg-[#242328] focus:outline-none">
                     <option value="">Semua Status</option>
                     <option value="active">Aktif</option>
                     <option value="inactive">Nonaktif</option>
@@ -68,7 +68,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">
                 <thead>
-                    <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+                    <tr class="bg-gray-50/70 dark:bg-[#1A1A1C] border-b border-gray-100 dark:border-[#242328] text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                         <th class="py-3 px-4 w-12">#</th>
                         <th class="py-3 px-4">Nama Lengkap</th>
                         <th class="py-3 px-4">Email</th>
@@ -78,9 +78,9 @@
                         <th class="py-3 px-4 text-center">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 dark:divide-slate-800">
+                <tbody class="divide-y divide-gray-100 dark:divide-[#1F2026]">
                     @forelse($users as $u)
-                        <tr class="hover:bg-gray-50/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <tr class="hover:bg-gray-50/50 dark:hover:bg-[#1A1A1C] transition-colors">
                             <td class="py-3.5 px-4 font-mono text-gray-400 dark:text-slate-500 text-[11px]">
                                 {{ $loop->iteration + ($users->currentPage()-1)*$users->perPage() }}
                             </td>
@@ -97,7 +97,7 @@
                                         @elseif($rl->name=='Admin FAT') bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50
                                         @elseif($rl->name=='Admin HRIS') bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50
                                         @elseif($rl->name=='Kepala Departemen') bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50
-                                        @else bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 border border-gray-200 dark:border-slate-700 @endif">
+                                        @else bg-gray-100 dark:bg-[#18181A] text-gray-700 dark:text-slate-300 border border-gray-200 dark:border-[#242328] @endif">
                                         {{ $rl->name }}
                                     </span>
                                 @endforeach
@@ -140,14 +140,14 @@
         </div>
 
         @if($users->hasPages())
-            <div class="p-4 border-t border-gray-100 dark:border-slate-800">
+            <div class="p-4 border-t border-gray-100 dark:border-[#1F2026]">
                 {{ $users->links() }}
             </div>
         @endif
     </div>
 
     <!-- Security Note -->
-    <div class="p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700 flex items-start gap-3 text-xs text-gray-600 dark:text-slate-400 transition-colors duration-200">
+    <div class="p-4 rounded-2xl bg-gray-50 dark:bg-[#18181A] border border-gray-200 dark:border-[#242328] flex items-start gap-3 text-xs text-gray-600 dark:text-slate-400 transition-colors duration-200">
         <i class="fas fa-shield-halved text-[#166534] dark:text-emerald-400 text-base shrink-0 mt-0.5"></i>
         <div>
             <h4 class="font-bold text-gray-900 dark:text-slate-100">Kebijakan Perlindungan Super Admin</h4>
@@ -161,8 +161,8 @@
     @if($showModal)
         <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
              wire:click.self="closeModal">
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-800 text-left">
-                <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-slate-800 mb-4">
+            <div class="bg-white dark:bg-[#18181A] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-[#242328] text-left">
+                <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-[#242328] mb-4">
                     <h3 class="text-base font-bold text-gray-900 dark:text-white">
                         {{ $isEdit ? 'Ubah Pengguna' : 'Tambah Pengguna Baru' }}
                     </h3>
@@ -174,26 +174,26 @@
                 <div class="space-y-4 text-xs">
                     <div>
                         <label class="block font-bold text-gray-700 dark:text-slate-300 mb-1">Nama *</label>
-                        <input type="text" wire:model="name" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
+                        <input type="text" wire:model="name" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] text-gray-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
                         @error('name') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
                         <label class="block font-bold text-gray-700 dark:text-slate-300 mb-1">Email *</label>
-                        <input type="email" wire:model="email" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
+                        <input type="email" wire:model="email" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] text-gray-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
                         @error('email') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
                         <label class="block font-bold text-gray-700 dark:text-slate-300 mb-1">Password {{ $isEdit ? '(kosongkan jika tidak diubah)' : '*' }}</label>
-                        <input type="password" wire:model="password" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
+                        <input type="password" wire:model="password" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] text-gray-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
                         @error('password') <span class="text-red-500 text-[10px]">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block font-bold text-gray-700 dark:text-slate-300 mb-1">Role *</label>
-                            <select wire:model="role" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600 bg-white">
+                            <select wire:model="role" class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] text-gray-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600">
                                 @foreach($roles as $r)
                                     <option value="{{ $r }}">{{ $r }}</option>
                                 @endforeach
@@ -201,7 +201,7 @@
                         </div>
                         <div>
                             <label class="block font-bold text-gray-700 dark:text-slate-300 mb-1">Kode Dept</label>
-                            <input type="text" wire:model="dept_code" placeholder="OPS, FIN, HRD..." class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600 font-mono">
+                            <input type="text" wire:model="dept_code" placeholder="OPS, FIN, HRD..." class="w-full px-3 py-2 rounded-xl border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] text-gray-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-green-600 font-mono">
                         </div>
                     </div>
 
@@ -213,8 +213,8 @@
                     </div>
                 </div>
 
-                <div class="pt-4 mt-6 border-t border-gray-100 dark:border-slate-800 flex items-center justify-end gap-2">
-                    <button wire:click="closeModal" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300">
+                <div class="pt-4 mt-6 border-t border-gray-100 dark:border-[#242328] flex items-center justify-end gap-2">
+                    <button wire:click="closeModal" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-[#242328] hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300">
                         Batal
                     </button>
                     <button wire:click="saveUser" class="px-4 py-2 rounded-xl bg-[#166534] hover:bg-[#14532D] text-white text-xs font-bold">
@@ -229,7 +229,7 @@
     @if($showDeleteModal)
         <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
              wire:click.self="closeModal">
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-800 text-center">
+            <div class="bg-white dark:bg-[#18181A] rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gray-100 dark:border-[#242328] text-center">
                 <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-rose-950/60 text-red-600 dark:text-rose-400 flex items-center justify-center mx-auto mb-3 text-lg">
                     <i class="fas fa-trash"></i>
                 </div>
@@ -238,7 +238,7 @@
                     Apakah Anda yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan.
                 </p>
                 <div class="flex items-center justify-center gap-2">
-                    <button wire:click="cancelDelete" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300">
+                    <button wire:click="cancelDelete" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-[#242328] hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300">
                         Batal
                     </button>
                     <button wire:click="deleteUser" class="px-4 py-2 rounded-xl bg-[#DC2626] hover:bg-red-700 text-white text-xs font-bold">

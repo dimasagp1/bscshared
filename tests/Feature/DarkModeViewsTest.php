@@ -60,8 +60,8 @@ class DarkModeViewsTest extends TestCase
             $response->assertStatus(200);
             $response->assertSee('bsc_dark_mode', false);
             $response->assertSee('toggleDark()', false);
-            $response->assertSee('dark:bg-[#0B1120]', false);
-            $response->assertSee('dark:bg-[#0F172A]', false);
+            $response->assertSee('dark:bg-[#121214]', false);
+            $response->assertSee('dark:bg-[#18181A]', false);
         }
     }
 

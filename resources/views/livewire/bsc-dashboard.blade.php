@@ -48,7 +48,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <!-- KOLOM KIRI: KARTU PIRAMIDA SKORING 4 TINGKAT (col-span-7) -->
-        <div class="lg:col-span-7 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-col justify-between transition-colors duration-200">
+        <div class="lg:col-span-7 bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-col justify-between transition-colors duration-200">
             <div>
                 <!-- Card Header -->
                 <div class="flex items-start justify-between mb-4">
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- Sub-Controls Bar -->
-                <div class="flex flex-wrap items-center justify-between gap-2.5 pb-4 border-b border-gray-100 dark:border-slate-800">
+                <div class="flex flex-wrap items-center justify-between gap-2.5 pb-4 border-b border-gray-100 dark:border-[#1F2026]">
                     <div class="flex items-center gap-2">
                         <!-- Dropdown Periode Indicator -->
                         <div class="px-2.5 py-1 rounded-lg border border-gray-200 dark:border-slate-700 text-xs font-semibold text-gray-800 dark:text-slate-200 flex items-center gap-1.5 bg-gray-50/50 dark:bg-slate-800/60">
@@ -227,7 +227,7 @@
         <div class="lg:col-span-5 space-y-4">
             
             <!-- KARTU 1: KESEHATAN TINGKATAN -->
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-shield-halved text-[#10B981] text-sm"></i>
@@ -320,32 +320,32 @@
             </div>
 
             <!-- KARTU 2: RINGKASAN INDIKATOR (2X2 GRID METRIK) -->
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-gray-800 dark:text-slate-200 mb-4">
                     RINGKASAN INDIKATOR ({{ $viewMode === 'ytd' ? 'AKUMULATIF YTD' : 'BULANAN' }})
                 </h3>
 
                 <div class="grid grid-cols-2 gap-3.5">
                     <!-- Tile 1 -->
-                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/40">
+                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-[#1F2026] bg-gray-50/50 dark:bg-slate-800/40">
                         <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Skor Revenue ({{ $viewMode === 'ytd' ? 'YTD' : 'Bulan Ini' }})</span>
                         <span class="text-2xl font-extrabold {{ $apexTextColorClass }} font-mono">{{ number_format($revenueScore, 1) }}%</span>
                     </div>
 
                     <!-- Tile 2 -->
-                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/40">
+                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-[#1F2026] bg-gray-50/50 dark:bg-slate-800/40">
                         <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Skor Rasio Keuangan</span>
                         <span class="text-2xl font-extrabold text-teal-700 dark:text-teal-400 font-mono">{{ number_format($avgRatioScore, 1) }}%</span>
                     </div>
 
                     <!-- Tile 3 -->
-                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/40">
+                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-[#1F2026] bg-gray-50/50 dark:bg-slate-800/40">
                         <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Skor Puncak Apex</span>
                         <span class="text-2xl font-extrabold {{ $apexTextColorClass }} font-mono">{{ number_format($apexScore, 1) }}%</span>
                     </div>
 
                     <!-- Tile 4 -->
-                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/40">
+                    <div class="p-4 rounded-2xl border border-gray-100 dark:border-[#1F2026] bg-gray-50/50 dark:bg-slate-800/40">
                         <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Status Capaian</span>
                         <span class="text-xl font-extrabold {{ $apexTextColorClass }} block">{{ $activeStatus }}</span>
                     </div>
@@ -353,7 +353,7 @@
             </div>
 
             <!-- KARTU 3: METODOLOGI BOBOT APEX & BREAKDOWN -->
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-sparkles text-[#10B981] text-xs"></i>
@@ -390,9 +390,9 @@
     @if($showModal && $selectedItemDetail)
         <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
              wire:click.self="closeModal">
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-800 text-left">
+            <div class="bg-white dark:bg-[#121214] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-[#1F2026] text-left">
                 <!-- Modal Header -->
-                <div class="flex items-start justify-between pb-3 border-b border-gray-100 dark:border-slate-800 mb-4">
+                <div class="flex items-start justify-between pb-3 border-b border-gray-100 dark:border-[#1F2026] mb-4">
                     <div>
                         <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 uppercase">
                             {{ $selectedItemDetail['code'] }}
@@ -443,7 +443,7 @@
                 </div>
 
                 <!-- Modal Footer -->
-                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-slate-800 flex items-center justify-end gap-2">
+                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-[#1F2026] flex items-center justify-end gap-2">
                     <button type="button" wire:click="closeModal" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300 transition-colors">
                         Tutup
                     </button>

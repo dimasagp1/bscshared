@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <!-- Header Banner -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200 flex items-center justify-center text-xl shadow-xs">
                 <i class="fas fa-gear"></i>
@@ -38,9 +38,9 @@
     @endif
 
     <!-- MAIN TABS CONTAINER -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-xs transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] overflow-hidden shadow-xs transition-colors duration-200">
         <!-- Tabs Header -->
-        <div class="flex items-center gap-2 p-3 bg-gray-50/60 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-xs font-semibold">
+        <div class="flex items-center gap-2 p-3 bg-gray-50/60 dark:bg-slate-800/60 border-b border-gray-100 dark:border-[#1F2026] text-xs font-semibold">
             <button type="button" wire:click="switchTab('identity')" 
                     class="px-4 py-2 rounded-xl transition-all flex items-center gap-2 {{ $activeTab==='identity' ? 'bg-[#DCFCE7] dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 shadow-xs' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-800' }}">
                 <i class="fas fa-id-card text-xs"></i>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-gray-100 dark:border-slate-800 flex items-center justify-end gap-2 text-xs">
+                    <div class="pt-4 border-t border-gray-100 dark:border-[#1F2026] flex items-center justify-end gap-2 text-xs">
                         <button type="button" wire:click="resetIdentity" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 font-semibold text-gray-700 dark:text-slate-300">
                             <i class="fas fa-undo mr-1"></i> Reset Default
                         </button>
@@ -141,7 +141,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-xs">
                             <thead>
-                                <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+                                <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-[#1F2026] text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                                     <th class="py-3 px-4">#</th>
                                     <th class="py-3 px-4">Nama Kunci</th>
                                     <th class="py-3 px-4">Token Key</th>
@@ -196,7 +196,7 @@
             @elseif($activeTab === 'system')
                 <!-- TAB 3: INFORMASI SISTEM -->
                 <div class="space-y-4">
-                    <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-slate-800">
+                    <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-[#1F2026]">
                         <table class="w-full text-left text-xs">
                             <tbody class="divide-y divide-gray-100 dark:divide-slate-800">
                                 @foreach($systemInfo as $label => $val)

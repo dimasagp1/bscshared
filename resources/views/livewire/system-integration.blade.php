@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <!-- Header Banner -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-transparent dark:border-indigo-900/50 flex items-center justify-center text-xl shadow-xs">
                 <i class="fas fa-network-wired"></i>
@@ -32,7 +32,7 @@
     @endif
 
     <!-- PIPELINE INTEGRASI 4-HOP BANNER -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
         <h3 class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
             <i class="fas fa-diagram-project text-[#166534] dark:text-emerald-400"></i>
             <span>Rantai Integrasi 4-Hop Enterprise Herbatech</span>
@@ -98,8 +98,8 @@
     </div>
 
     <!-- WADAH PENERIMAAN DATA FINANCE ERP -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs space-y-5 transition-colors duration-200">
-        <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-slate-800">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs space-y-5 transition-colors duration-200">
+        <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-[#1F2026]">
             <div>
                 <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
                     <i class="fas fa-file-invoice-dollar text-[#166534] dark:text-emerald-400"></i>
@@ -191,7 +191,7 @@
     <!-- API CONFIGURATION & SIMULATORS (2 COLUMNS) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- API Inbound Settings -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs space-y-4 transition-colors duration-200">
             <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
                 <i class="fas fa-key text-gray-400 dark:text-slate-500"></i>
                 <span>Pengaturan API Gateway Inbound</span>
@@ -226,7 +226,7 @@
         </div>
 
         <!-- Simulator Payload Inbound HRIS -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs space-y-4 transition-colors duration-200">
             <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
                 <i class="fas fa-vial text-gray-400 dark:text-slate-500"></i>
                 <span>Simulator Pengiriman Payload HRIS / Unit</span>

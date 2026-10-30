@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <!-- Header Banner -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-[#FEE2E2] dark:bg-rose-950/60 text-[#DC2626] dark:text-rose-400 border border-transparent dark:border-rose-900/50 flex items-center justify-center text-xl shadow-xs">
                 <i class="fas fa-clipboard-list"></i>
@@ -33,8 +33,8 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <!-- FORM TAMBAH PROGRAM KERJA (col-span-4) -->
-        <div class="lg:col-span-4 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
-            <div class="flex items-center gap-2 pb-3 mb-4 border-b border-gray-100 dark:border-slate-800">
+        <div class="lg:col-span-4 bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
+            <div class="flex items-center gap-2 pb-3 mb-4 border-b border-gray-100 dark:border-[#1F2026]">
                 <i class="fas fa-plus-circle text-[#DC2626] dark:text-rose-400"></i>
                 <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider">
                     Tambah Inisiatif Perbaikan
@@ -72,8 +72,8 @@
         </div>
 
         <!-- TABEL PROGRAM KERJA (col-span-8) -->
-        <div class="lg:col-span-8 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-xs transition-colors duration-200">
-            <div class="p-5 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+        <div class="lg:col-span-8 bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] overflow-hidden shadow-xs transition-colors duration-200">
+            <div class="p-5 border-b border-gray-100 dark:border-[#1F2026] flex items-center justify-between">
                 <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
                     <i class="fas fa-list-ol text-gray-400 dark:text-slate-500"></i>
                     <span>Progress Inisiatif &amp; Tindak Lanjut KPI</span>
@@ -83,7 +83,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
                     <thead>
-                        <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+                        <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-[#1F2026] text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                             <th class="py-3 px-4">Dept</th>
                             <th class="py-3 px-4">Judul Inisiatif / Program Kerja</th>
                             <th class="py-3 px-4">Progress Fisik (%)</th>

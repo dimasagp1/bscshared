@@ -1,5 +1,5 @@
 <div class="max-w-4xl mx-auto py-12 px-4">
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-8 shadow-xs text-center flex flex-col items-center transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-8 shadow-xs text-center flex flex-col items-center transition-colors duration-200">
         <!-- Squircle Icon Box -->
         <div class="w-16 h-16 rounded-2xl bg-[#DCFCE7] dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-transparent dark:border-emerald-800/50 flex items-center justify-center text-2xl shadow-xs mb-4">
             <i class="fas fa-hammer"></i>

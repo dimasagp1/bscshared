@@ -13,7 +13,7 @@
     @endif
 
     <!-- Top Workflow Stepper Hero Card -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
         <!-- Top Row: Badge, Title, Simulation Status, and Full View Toggle -->
         <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3 flex-wrap">
@@ -83,9 +83,9 @@
     <!-- STEP 1: PRODUCT REVIEW — PORTOFOLIO SKU & PIPELINE LAUNCH PRODUK BARU     -->
     <!-- ========================================================================= -->
     @if($showAllSteps || $currentStep === 1)
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
             <!-- Step Header -->
-            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-slate-800 pb-3 flex-wrap">
+            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-[#1F2026] pb-3 flex-wrap">
                 <div class="flex items-center gap-2.5">
                     <div class="w-6 h-6 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 flex items-center justify-center text-xs">
                         <i class="fas fa-box-archive"></i>
@@ -109,7 +109,7 @@
             <!-- 3 SKU Product Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
                 @foreach($skus as $sku)
-                    <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800 flex flex-col justify-between space-y-3">
+                    <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026] flex flex-col justify-between space-y-3">
                         <!-- Top Row: Name & Launch Quarter -->
                         <div class="flex items-start justify-between gap-2">
                             <h4 class="font-bold text-xs text-gray-900 dark:text-white">
@@ -126,7 +126,7 @@
                         </div>
 
                         <!-- Bottom Row: Target Est & Status -->
-                        <div class="flex items-center justify-between text-xs pt-2 border-t border-gray-200/60 dark:border-slate-800">
+                        <div class="flex items-center justify-between text-xs pt-2 border-t border-gray-200/60 dark:border-[#1F2026]">
                             <span class="font-mono text-gray-700 dark:text-slate-300">
                                 Target Est: <strong class="text-gray-900 dark:text-white">{{ $sku['target_est'] }}</strong>
                             </span>
@@ -144,9 +144,9 @@
     <!-- STEP 2: DEMAND REVIEW — KONSENSUS PERAMALAN PERMINTAAN PASAR              -->
     <!-- ========================================================================= -->
     @if($showAllSteps || $currentStep === 2)
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
             <!-- Step Header -->
-            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-slate-800 pb-3 flex-wrap">
+            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-[#1F2026] pb-3 flex-wrap">
                 <div class="flex items-center gap-2.5">
                     <div class="w-6 h-6 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs">
                         <i class="fas fa-chart-line"></i>
@@ -171,7 +171,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse text-xs">
                     <thead>
-                        <tr class="bg-gray-50/70 dark:bg-slate-900/60 border-b border-gray-100 dark:border-slate-800 text-[10px] uppercase tracking-wider text-gray-500 dark:text-slate-400 font-bold">
+                        <tr class="bg-gray-50/70 dark:bg-slate-900/60 border-b border-gray-100 dark:border-[#1F2026] text-[10px] uppercase tracking-wider text-gray-500 dark:text-slate-400 font-bold">
                             <th class="py-3 px-4">Saluran Distribusi (Channel)</th>
                             <th class="py-3 px-4 text-right">Volume Proyeksi</th>
                             <th class="py-3 px-4 text-center">Porsi (%)</th>
@@ -203,9 +203,9 @@
     <!-- STEP 3: SUPPLY REVIEW — KAPASITAS PABRIK & BATASAN PASOKAN                -->
     <!-- ========================================================================= -->
     @if($showAllSteps || $currentStep === 3)
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
             <!-- Step Header -->
-            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-slate-800 pb-3 flex-wrap">
+            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-[#1F2026] pb-3 flex-wrap">
                 <div class="flex items-center gap-2.5">
                     <div class="w-6 h-6 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs">
                         <i class="fas fa-industry"></i>
@@ -228,19 +228,19 @@
 
             <!-- Supply Metrics Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">Batas Output Maksimal</span>
                     <span class="font-mono font-bold text-base text-gray-900 dark:text-white">{{ $supplyMetrics['max_capacity'] }}</span>
                 </div>
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">OTD Bahan Baku Simplisia</span>
                     <span class="font-mono font-bold text-base text-[#166534] dark:text-emerald-400">{{ $supplyMetrics['raw_material_otd'] }}</span>
                 </div>
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">Identifikasi Bottleneck</span>
                     <span class="font-bold text-xs text-amber-700 dark:text-amber-400">{{ $supplyMetrics['bottleneck'] }}</span>
                 </div>
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">Rencana Lembur Pabrik</span>
                     <span class="font-bold text-xs text-gray-900 dark:text-white">{{ $supplyMetrics['overtime_planned'] }}</span>
                 </div>
@@ -252,9 +252,9 @@
     <!-- STEP 4: REKONSILIASI FINANSIAL — GAP ANALYSIS IBP TERHADAP BSC            -->
     <!-- ========================================================================= -->
     @if($showAllSteps || $currentStep === 4)
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
             <!-- Step Header -->
-            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-slate-800 pb-3 flex-wrap">
+            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-[#1F2026] pb-3 flex-wrap">
                 <div class="flex items-center gap-2.5">
                     <div class="w-6 h-6 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs">
                         <i class="fas fa-scale-balanced"></i>
@@ -277,7 +277,7 @@
 
             <!-- Reconciliation Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">Target Apex BSC Saat Ini</span>
                     <span class="font-mono font-bold text-sm text-gray-900 dark:text-white">{{ $financialReconciliation['bsc_current_target'] }}</span>
                 </div>
@@ -286,12 +286,12 @@
                     <span class="font-mono font-bold text-sm text-[#166534] dark:text-emerald-300">{{ $financialReconciliation['ibp_consensus_target'] }}</span>
                     <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold block mt-0.5">{{ $financialReconciliation['variance_uplift'] }}</span>
                 </div>
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">Proyeksi Gross Profit Margin</span>
                     <span class="font-mono font-bold text-sm text-[#166534] dark:text-emerald-400">{{ $financialReconciliation['projected_gpm'] }}</span>
                     <span class="text-[10px] text-gray-500 dark:text-slate-400 block mt-0.5">Target BSC: {{ $financialReconciliation['target_gpm'] }}</span>
                 </div>
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                     <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase block mb-1">Proyeksi Net Profit</span>
                     <span class="font-mono font-bold text-sm text-gray-900 dark:text-white">{{ $financialReconciliation['projected_net_profit'] }}</span>
                     <span class="text-[10px] text-gray-500 dark:text-slate-400 block mt-0.5">NPM: {{ $financialReconciliation['projected_npm'] }}</span>
@@ -304,9 +304,9 @@
     <!-- STEP 5: MANAGEMENT BUSINESS REVIEW — KEPUTUSAN EKSEKUTIF & TRANSMISI BSC -->
     <!-- ========================================================================= -->
     @if($showAllSteps || $currentStep === 5)
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-5 transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-5 transition-colors duration-200">
             <!-- Step Header -->
-            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-slate-800 pb-3 flex-wrap">
+            <div class="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-[#1F2026] pb-3 flex-wrap">
                 <div class="flex items-center gap-2.5">
                     <div class="w-6 h-6 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs">
                         <i class="fas fa-users-viewfinder"></i>
@@ -325,7 +325,7 @@
             <!-- Executive Approval Status -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 @foreach($executives as $ex)
-                    <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800">
+                    <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026]">
                         <div class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase mb-1">{{ $ex['role'] }}</div>
                         <div class="font-bold text-xs text-gray-900 dark:text-white mb-2">{{ $ex['name'] }}</div>
                         <div class="flex items-center justify-between text-[11px]">

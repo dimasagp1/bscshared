@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-[#0F172A] border-b border-gray-200 dark:border-slate-800 px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs relative {{ $showManageModal ? 'z-[60]' : 'z-10' }} transition-colors duration-200">
+<div class="bg-white dark:bg-[#18181A] border-b border-gray-200 dark:border-[#242328] px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs relative {{ $showManageModal ? 'z-[60]' : 'z-10' }} transition-colors duration-200">
     
     <!-- LEFT CONTROLS: PERIODIC MONITOR BADGE, TAHUN DROPDOWN, BULAN DROPDOWN, 12 MONTH PILLS -->
     <div class="flex flex-wrap items-center gap-2">
@@ -13,7 +13,7 @@
             <button type="button" 
                     @click="openYear = !openYear" 
                     @click.outside="openYear = false"
-                    class="px-2.5 py-1 rounded-lg border border-gray-200 dark:border-slate-700 font-semibold text-gray-800 dark:text-slate-200 flex items-center gap-1 cursor-pointer bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                    class="px-2.5 py-1 rounded-lg border border-gray-200 dark:border-[#242328] font-semibold text-gray-800 dark:text-slate-200 flex items-center gap-1 cursor-pointer bg-white dark:bg-[#121214] hover:bg-gray-50 dark:hover:bg-[#1A1A1C] transition-colors">
                 <span>Tahun: <strong>{{ $selectedYear }}</strong></span>
                 <i class="fas fa-chevron-down text-[9px] text-gray-400 dark:text-slate-500 ml-0.5"></i>
             </button>
@@ -26,12 +26,12 @@
                  x-transition:leave="transition ease-in duration-75"
                  x-transition:leave-start="transform opacity-100 scale-100"
                  x-transition:leave-end="transform opacity-0 scale-95"
-                 class="absolute left-0 mt-1 w-32 bg-white dark:bg-[#0F172A] rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 py-1 z-30">
+                 class="absolute left-0 mt-1 w-32 bg-white dark:bg-[#18181A] rounded-xl shadow-lg border border-gray-100 dark:border-[#242328] py-1 z-30">
                 @foreach($availableYears as $yr)
                     <button type="button" 
                             wire:click="setYear('{{ $yr }}')" 
                             @click="openYear = false"
-                            class="w-full text-left px-3 py-1.5 text-xs hover:bg-gray-50 dark:hover:bg-slate-800/80 flex items-center justify-between {{ $selectedYear == $yr ? 'font-bold text-[#166534] dark:text-emerald-400 bg-green-50/50 dark:bg-emerald-950/40' : 'text-gray-700 dark:text-slate-300' }}">
+                            class="w-full text-left px-3 py-1.5 text-xs hover:bg-gray-50 dark:hover:bg-[#242328] flex items-center justify-between {{ $selectedYear == $yr ? 'font-bold text-[#166534] dark:text-emerald-400 bg-green-50/50 dark:bg-emerald-950/40' : 'text-gray-700 dark:text-slate-300' }}">
                         <span>{{ $yr }}</span>
                         @if($selectedYear == $yr)
                             <i class="fas fa-check text-[10px] text-[#166534] dark:text-emerald-400"></i>
@@ -46,7 +46,7 @@
             <button type="button" 
                     @click="openMonth = !openMonth" 
                     @click.outside="openMonth = false"
-                    class="px-2.5 py-1 rounded-lg border border-gray-200 dark:border-slate-700 font-semibold text-gray-800 dark:text-slate-200 flex items-center gap-1.5 cursor-pointer bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                    class="px-2.5 py-1 rounded-lg border border-gray-200 dark:border-[#242328] font-semibold text-gray-800 dark:text-slate-200 flex items-center gap-1.5 cursor-pointer bg-white dark:bg-[#121214] hover:bg-gray-50 dark:hover:bg-[#1A1A1C] transition-colors">
                 <span>Bulan: <strong>{{ $currentMonthName }} ({{ $selectedMonth }})</strong></span>
                 <span class="w-2 h-2 rounded-full bg-green-500 shrink-0"></span>
                 <i class="fas fa-chevron-down text-[9px] text-gray-400 dark:text-slate-500"></i>
@@ -60,12 +60,12 @@
                  x-transition:leave="transition ease-in duration-75"
                  x-transition:leave-start="transform opacity-100 scale-100"
                  x-transition:leave-end="transform opacity-0 scale-95"
-                 class="absolute left-0 mt-1 w-48 bg-white dark:bg-[#0F172A] rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 py-1 z-30 max-h-64 overflow-y-auto">
+                 class="absolute left-0 mt-1 w-48 bg-white dark:bg-[#18181A] rounded-xl shadow-lg border border-gray-100 dark:border-[#242328] py-1 z-30 max-h-64 overflow-y-auto">
                 @foreach($months as $num => $m)
                     <button type="button" 
                             wire:click="setMonth('{{ $num }}')" 
                             @click="openMonth = false"
-                            class="w-full text-left px-3 py-1.5 text-xs hover:bg-gray-50 dark:hover:bg-slate-800/80 flex items-center justify-between {{ $selectedMonth === $num ? 'font-bold text-[#166534] dark:text-emerald-400 bg-green-50/50 dark:bg-emerald-950/40' : 'text-gray-700 dark:text-slate-300' }}">
+                            class="w-full text-left px-3 py-1.5 text-xs hover:bg-gray-50 dark:hover:bg-[#242328] flex items-center justify-between {{ $selectedMonth === $num ? 'font-bold text-[#166534] dark:text-emerald-400 bg-green-50/50 dark:bg-emerald-950/40' : 'text-gray-700 dark:text-slate-300' }}">
                         <span>{{ $num }} - {{ $m['name'] }}</span>
                         @if($selectedMonth === $num)
                             <span class="w-2 h-2 rounded-full bg-[#166534] dark:bg-emerald-400"></span>
@@ -89,7 +89,7 @@
                     <!-- Inactive Month Pill -->
                     <button type="button" 
                             wire:click="setMonth('{{ $num }}')" 
-                            class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-slate-200 text-gray-600 dark:text-slate-400 font-medium text-xs transition-colors">
+                            class="px-1.5 py-0.5 rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-[#242328] hover:text-gray-900 dark:hover:text-slate-200 text-gray-600 dark:text-slate-400 font-medium text-xs transition-colors">
                         {{ $m['short'] }}{{ $m['has_dot'] ? ' •' : '' }}
                     </button>
                 @endif
@@ -100,16 +100,16 @@
     <!-- RIGHT CONTROLS: PER BULAN VS AKUMULATIF (YTD), TAHUN LALU, COMPARE, KELOLA -->
     <div class="flex items-center gap-3">
         <!-- Segmented Toggle: Per Bulan vs Akumulatif (YTD) -->
-        <div class="flex items-center bg-gray-100 dark:bg-slate-800/80 p-0.5 rounded-lg border border-gray-200 dark:border-slate-700 text-[11px] font-semibold">
+        <div class="flex items-center bg-gray-100 dark:bg-[#121214] p-0.5 rounded-lg border border-gray-200 dark:border-[#242328] text-[11px] font-semibold">
             <button type="button" 
                     wire:click="setViewMode('monthly')"
-                    class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 {{ $viewMode === 'monthly' ? 'bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 shadow-xs' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200' }}">
+                    class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 {{ $viewMode === 'monthly' ? 'bg-white dark:bg-[#1A1A1C] text-gray-900 dark:text-slate-100 shadow-xs' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200' }}">
                 <i class="far fa-calendar text-[11px]"></i>
                 <span>Per Bulan</span>
             </button>
             <button type="button" 
                     wire:click="setViewMode('ytd')"
-                    class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 {{ $viewMode === 'ytd' ? 'bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 shadow-xs' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200' }}">
+                    class="px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 {{ $viewMode === 'ytd' ? 'bg-white dark:bg-[#1A1A1C] text-gray-900 dark:text-slate-100 shadow-xs' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200' }}">
                 <i class="fas fa-chart-line text-[11px]"></i>
                 <span>Akumulatif (YTD)</span>
             </button>
@@ -118,14 +118,14 @@
         <!-- Prior Year, Compare, and Kelola Actions -->
         <div class="flex items-center gap-1 text-[11px]">
             <!-- Reference Tahun Lalu -->
-            <span class="px-2 py-1 rounded border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/60 text-gray-700 dark:text-slate-300 font-mono">
+            <span class="px-2 py-1 rounded border border-gray-200 dark:border-[#242328] bg-gray-50 dark:bg-[#121214] text-gray-700 dark:text-slate-300 font-mono">
                 <i class="far fa-clock mr-1 text-gray-400 dark:text-slate-500"></i> Tahun Lalu: <strong>{{ $priorYearPeriod }}</strong>
             </span>
 
             <!-- Swap / Compare Button -->
             <button type="button" 
                     wire:click="swapPriorYear"
-                    class="px-2 py-1 rounded border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition-colors" 
+                    class="px-2 py-1 rounded border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] hover:bg-gray-50 dark:hover:bg-[#1A1A1C] text-gray-700 dark:text-slate-300 transition-colors" 
                     title="Ganti ke Tahun Lalu ({{ $priorYearPeriod }}) untuk Komparasi">
                 <i class="fas fa-arrow-right-arrow-left text-[10px]"></i>
             </button>
@@ -133,7 +133,7 @@
             <!-- + Kelola Modal Button -->
             <button type="button" 
                     wire:click="openManageModal"
-                    class="px-2.5 py-1 rounded border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 font-bold text-gray-800 dark:text-slate-200 transition-colors" 
+                    class="px-2.5 py-1 rounded border border-gray-200 dark:border-[#242328] bg-white dark:bg-[#121214] hover:bg-gray-50 dark:hover:bg-[#1A1A1C] font-bold text-gray-800 dark:text-slate-200 transition-colors" 
                     title="Kelola Daftar Periode & Status">
                 + Kelola
             </button>
@@ -144,9 +144,9 @@
     @if($showManageModal)
         <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
              wire:click.self="closeManageModal">
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-800 text-left relative z-10 animate-in zoom-in-95 duration-150">
+            <div class="bg-white dark:bg-[#18181A] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-[#242328] text-left relative z-10 animate-in zoom-in-95 duration-150">
                 <!-- Modal Header -->
-                <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-slate-800 mb-4">
+                <div class="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-[#242328] mb-4">
                     <div class="flex items-center gap-2">
                         <div class="w-8 h-8 rounded-xl bg-[#DCFCE7] dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-transparent dark:border-emerald-800/50 flex items-center justify-center text-sm">
                             <i class="far fa-calendar-check"></i>
@@ -166,13 +166,13 @@
                 @endif
 
                 <!-- Form Tambah Periode Baru -->
-                <form wire:submit.prevent="createPeriod" class="p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700 mb-4">
+                <form wire:submit.prevent="createPeriod" class="p-4 rounded-2xl bg-gray-50 dark:bg-[#121214] border border-gray-200 dark:border-[#242328] mb-4">
                     <h4 class="text-xs font-bold text-gray-800 dark:text-slate-200 mb-2">Buka Periode Pelaporan Baru</h4>
                     <div class="flex items-center gap-2">
                         <input type="text" 
                                wire:model="newPeriodInput" 
                                placeholder="Format: YYYY-MM (misal: 2026-11)" 
-                               class="flex-1 px-3 py-1.5 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-mono font-bold focus:outline-none focus:ring-1 focus:ring-green-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500">
+                               class="flex-1 px-3 py-1.5 rounded-xl border border-gray-200 dark:border-[#242328] text-xs font-mono font-bold focus:outline-none focus:ring-1 focus:ring-green-600 bg-white dark:bg-[#18181A] text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500">
                         <button type="submit" class="px-4 py-1.5 rounded-xl bg-[#166534] hover:bg-[#14532D] text-white text-xs font-bold shrink-0">
                             + Tambah Periode
                         </button>
@@ -184,9 +184,9 @@
 
                 <!-- Daftar Periode Tersimpan -->
                 <h4 class="text-xs font-bold text-gray-700 dark:text-slate-300 uppercase tracking-wider mb-2">Status Periode Terdaftar:</h4>
-                <div class="max-h-56 overflow-y-auto rounded-2xl border border-gray-100 dark:border-slate-800 divide-y divide-gray-100 dark:divide-slate-800">
+                <div class="max-h-56 overflow-y-auto rounded-2xl border border-gray-100 dark:border-[#242328] divide-y divide-gray-100 dark:divide-[#242328]">
                     @forelse($allPeriods as $p)
-                        <div class="p-3 flex items-center justify-between hover:bg-gray-50/60 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="p-3 flex items-center justify-between hover:bg-gray-50/60 dark:hover:bg-[#242328] transition-colors">
                             <div class="flex items-center gap-2.5">
                                 <span class="font-mono font-bold text-xs text-gray-900 dark:text-slate-100">{{ $p->period }}</span>
                                 @if($p->period === $selectedPeriod)
@@ -194,12 +194,12 @@
                                 @endif
                             </div>
                             <div class="flex items-center gap-2">
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {{ $p->status === 'OPEN' ? 'bg-green-100 dark:bg-emerald-950/60 text-green-700 dark:text-emerald-400' : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400' }}">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {{ $p->status === 'OPEN' ? 'bg-green-100 dark:bg-emerald-950/60 text-green-700 dark:text-emerald-400' : 'bg-gray-100 dark:bg-[#242328] text-gray-600 dark:text-slate-400' }}">
                                     {{ $p->status }}
                                 </span>
                                 <button type="button" 
                                         wire:click="toggleStatus('{{ $p->period }}')" 
-                                        class="px-2 py-1 rounded-lg text-[10px] font-semibold border border-gray-200 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-700 dark:text-slate-300 transition-colors">
+                                        class="px-2 py-1 rounded-lg text-[10px] font-semibold border border-gray-200 dark:border-[#242328] hover:bg-gray-100 dark:hover:bg-[#242328] text-gray-700 dark:text-slate-300 transition-colors">
                                     {{ $p->status === 'OPEN' ? 'Kunci (Close)' : 'Buka (Open)' }}
                                 </button>
                                 @if($p->period !== $selectedPeriod)
@@ -216,8 +216,8 @@
                     @endforelse
                 </div>
 
-                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-slate-800 flex justify-end">
-                    <button type="button" wire:click="closeManageModal" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300 transition-colors">
+                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-[#242328] flex justify-end">
+                    <button type="button" wire:click="closeManageModal" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-[#242328] hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300 transition-colors">
                         Tutup
                     </button>
                 </div>

@@ -24,7 +24,7 @@
     @endif
 
     <!-- Card 1: Header Sesi Simulasi & Undo/Redo History -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3.5">
             <div class="w-12 h-12 rounded-2xl bg-[#DCFCE7] dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-green-200/60 dark:border-emerald-800/50 flex items-center justify-center text-xl shadow-xs shrink-0">
                 <i class="fas fa-clock-rotate-left"></i>
@@ -76,7 +76,7 @@
     </div>
 
     <!-- Card 2: Form Penyimpanan Skenario Baru -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-wrap items-center gap-3 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs flex flex-wrap items-center gap-3 transition-colors duration-200">
         <input type="text" wire:model="scenarioName" wire:keydown.enter="saveScenario" 
                placeholder="Nama skenario (mis. Kenaikan Target Revenue 5%)" 
                class="flex-1 min-w-[240px] px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 transition-colors">
@@ -95,14 +95,14 @@
     </div>
 
     <!-- Card 3: Daftar Skenario Tersimpan -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
         <h3 class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider">
             DAFTAR SKENARIO TERSIMPAN
         </h3>
 
         <div class="space-y-3">
             @forelse($savedScenarios as $sc)
-                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800 flex items-center justify-between gap-4 transition-colors">
+                <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026] flex items-center justify-between gap-4 transition-colors">
                     <div class="flex items-center gap-3.5">
                         <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/50 flex items-center justify-center text-sm shrink-0">
                             <i class="far fa-file-lines"></i>
@@ -146,9 +146,9 @@
             <div class="fixed inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-xs transition-opacity" wire:click="closeExportModal"></div>
 
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-3xl bg-white dark:bg-[#0F172A] text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-xl border border-gray-200 dark:border-slate-800">
+                <div class="relative transform overflow-hidden rounded-3xl bg-white dark:bg-[#121214] text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-xl border border-gray-200 dark:border-[#1F2026]">
                     <!-- Modal Header -->
-                    <div class="p-6 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+                    <div class="p-6 border-b border-gray-100 dark:border-[#1F2026] flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 flex items-center justify-center text-base border border-indigo-200/60 dark:border-indigo-800/50">
                                 <i class="fas fa-download"></i>
@@ -169,11 +169,11 @@
 
                     <!-- Modal Body -->
                     <div class="p-6 space-y-4 text-xs">
-                        <textarea readonly rows="12" class="w-full p-4 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 font-mono text-[11px] text-gray-800 dark:text-slate-200 focus:outline-none select-all">{{ $exportJsonContent }}</textarea>
+                        <textarea readonly rows="12" class="w-full p-4 rounded-2xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-[#1F2026] font-mono text-[11px] text-gray-800 dark:text-slate-200 focus:outline-none select-all">{{ $exportJsonContent }}</textarea>
                     </div>
 
                     <!-- Modal Footer -->
-                    <div class="p-4 bg-gray-50 dark:bg-slate-900/60 border-t border-gray-100 dark:border-slate-800 flex justify-end gap-2">
+                    <div class="p-4 bg-gray-50 dark:bg-slate-900/60 border-t border-gray-100 dark:border-[#1F2026] flex justify-end gap-2">
                         <button wire:click="closeExportModal" class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 text-xs font-bold transition-colors">
                             Tutup
                         </button>
@@ -191,9 +191,9 @@
             <div class="fixed inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-xs transition-opacity" wire:click="closeImportModal"></div>
 
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-3xl bg-white dark:bg-[#0F172A] text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-xl border border-gray-200 dark:border-slate-800">
+                <div class="relative transform overflow-hidden rounded-3xl bg-white dark:bg-[#121214] text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-xl border border-gray-200 dark:border-[#1F2026]">
                     <!-- Modal Header -->
-                    <div class="p-6 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+                    <div class="p-6 border-b border-gray-100 dark:border-[#1F2026] flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-2xl bg-[#DCFCE7] dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 flex items-center justify-center text-base border border-green-200/60 dark:border-emerald-800/50">
                                 <i class="fas fa-upload"></i>
@@ -214,11 +214,11 @@
 
                     <!-- Modal Body -->
                     <div class="p-6 space-y-4 text-xs">
-                        <textarea wire:model="importJsonContent" rows="10" placeholder='{"name": "TARGET KHUSUS", "steps_count": 0, "payload": {...}}' class="w-full p-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 font-mono text-[11px] text-gray-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600"></textarea>
+                        <textarea wire:model="importJsonContent" rows="10" placeholder='{"name": "TARGET KHUSUS", "steps_count": 0, "payload": {...}}' class="w-full p-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-[#1F2026] font-mono text-[11px] text-gray-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600"></textarea>
                     </div>
 
                     <!-- Modal Footer -->
-                    <div class="p-4 bg-gray-50 dark:bg-slate-900/60 border-t border-gray-100 dark:border-slate-800 flex justify-end gap-2">
+                    <div class="p-4 bg-gray-50 dark:bg-slate-900/60 border-t border-gray-100 dark:border-[#1F2026] flex justify-end gap-2">
                         <button wire:click="closeImportModal" class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 text-xs font-bold transition-colors">
                             Batal
                         </button>

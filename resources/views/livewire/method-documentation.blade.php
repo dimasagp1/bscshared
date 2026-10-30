@@ -14,7 +14,7 @@
     @endif
 
     <!-- HERO HEADER CARD: DOKUMENTASI METODOLOGI & SELF-TEST SUITE -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3.5">
             <div class="w-10 h-10 rounded-2xl bg-green-50 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-green-100 dark:border-emerald-900/50 flex items-center justify-center text-base shadow-xs">
                 <i class="far fa-book-open"></i>
@@ -49,7 +49,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         
         <!-- CARD 1: REGULASI SKORING (P-17 S/D P-22) -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
             <h3 class="text-xs font-bold uppercase tracking-wider text-gray-800 dark:text-slate-200 flex items-center gap-2 mb-5">
                 <i class="fas fa-code text-[#10B981]"></i>
                 <span>REGULASI SKORING (P-17 S/D P-22)</span>
@@ -83,7 +83,7 @@
         </div>
 
         <!-- CARD 2: CAKUPAN VERIFIKASI -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs transition-colors duration-200">
             <h3 class="text-xs font-bold uppercase tracking-wider text-gray-800 dark:text-slate-200 flex items-center gap-2 mb-5">
                 <i class="fas fa-shield-halved text-[#10B981]"></i>
                 <span>CAKUPAN VERIFIKASI</span>
@@ -128,8 +128,8 @@
     @if($testCompleted)
         <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
              wire:click.self="closeTestResult">
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-800 text-left">
-                <div class="flex items-start justify-between pb-3 border-b border-gray-100 dark:border-slate-800 mb-4">
+            <div class="bg-white dark:bg-[#121214] rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 dark:border-[#1F2026] text-left">
+                <div class="flex items-start justify-between pb-3 border-b border-gray-100 dark:border-[#1F2026] mb-4">
                     <div class="flex items-center gap-2.5">
                         <div class="w-9 h-9 rounded-xl bg-green-100 dark:bg-emerald-950/60 text-green-700 dark:text-emerald-400 flex items-center justify-center">
                             <i class="fas fa-circle-check"></i>
@@ -160,7 +160,7 @@
                     @endforeach
                 </div>
 
-                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-slate-800 text-right">
+                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-[#1F2026] text-right">
                     <button type="button" wire:click="closeTestResult" class="px-4 py-2 rounded-lg bg-[#166534] hover:bg-[#14532D] text-white text-xs font-bold">
                         Selesai &amp; Tutup
                     </button>

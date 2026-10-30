@@ -14,7 +14,7 @@
     @endif
 
     <!-- TOP COUNTERS & ACTIONS ROW (EXACT REPRODUCTION OF MOCKUP) -->
-    <div class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#0F172A] p-4 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+    <div class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#121214] p-4 rounded-2xl border border-gray-200 dark:border-[#1F2026] shadow-xs transition-colors duration-200">
         
         <!-- Left Summary Counter Badges -->
         <div class="flex items-center gap-2">
@@ -81,7 +81,7 @@
                 $isRevealed = in_array($deptCode, $showHiddenKpis);
             @endphp
 
-            <div class="bg-white dark:bg-[#0F172A] rounded-2xl border border-gray-200 dark:border-slate-800 shadow-xs overflow-hidden transition-all duration-150">
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-gray-200 dark:border-[#1F2026] shadow-xs overflow-hidden transition-all duration-150">
                 
                 <!-- HEADER AKORDEON KARTU DEPARTEMEN -->
                 <div wire:click="toggleAccordion('{{ $deptCode }}')" 
@@ -128,14 +128,14 @@
 
                 <!-- BODY AKORDEON: JIKA DIBUKA -->
                 @if($isOpen)
-                    <div class="border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-[#0F172A]">
+                    <div class="border-t border-gray-100 dark:border-[#1F2026] bg-white dark:bg-[#121214]">
                         
                         <!-- KONDISI A: JIKA DEPARTEMEN MEMILIKI KPI BERMASALAH (EXPANDED KPI TABLE) -->
                         @if($isIssue && count($dept['items']) > 0)
                             <div class="overflow-x-auto">
                                 <table class="w-full text-left border-collapse text-xs">
                                     <thead>
-                                        <tr class="bg-gray-50/75 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+                                        <tr class="bg-gray-50/75 dark:bg-slate-800/60 border-b border-gray-100 dark:border-[#1F2026] text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                                             <th class="py-2.5 px-5">KODE &amp; NAMA KPI</th>
                                             <th class="py-2.5 px-4">JEMBATAN ALUR</th>
                                             <th class="py-2.5 px-3 text-center">BOBOT</th>
@@ -225,7 +225,7 @@
                             </div>
 
                             <!-- Footer Akordeon: Opsi Menampilkan KPI 100% yang Disembunyikan -->
-                            <div class="p-3 bg-gray-50/70 dark:bg-slate-800/60 border-t border-gray-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                            <div class="p-3 bg-gray-50/70 dark:bg-slate-800/60 border-t border-gray-100 dark:border-[#1F2026] flex items-center justify-between text-xs">
                                 <span class="text-gray-500 dark:text-slate-400 text-[11px] flex items-center gap-1.5">
                                     <i class="far fa-eye-slash text-gray-400 dark:text-slate-500"></i>
                                     <span>{{ $dept['hidden_count'] }} KPI Tercapai (100%) disembunyikan dalam Mode Fokus</span>
@@ -288,8 +288,8 @@
     @if($traceModalKpi)
         <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150"
              wire:click.self="closeTraceModal">
-            <div class="bg-white dark:bg-[#0F172A] rounded-3xl max-md w-full p-6 shadow-2xl border border-gray-100 dark:border-slate-800 text-left">
-                <div class="flex items-start justify-between pb-3 border-b border-gray-100 dark:border-slate-800 mb-3">
+            <div class="bg-white dark:bg-[#121214] rounded-3xl max-md w-full p-6 shadow-2xl border border-gray-100 dark:border-[#1F2026] text-left">
+                <div class="flex items-start justify-between pb-3 border-b border-gray-100 dark:border-[#1F2026] mb-3">
                     <div class="flex items-center gap-2">
                         <span class="w-8 h-8 rounded-xl bg-green-50 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-transparent dark:border-emerald-800/50 flex items-center justify-center text-xs">
                             <i class="fas fa-bolt"></i>
@@ -313,7 +313,7 @@
                     </div>
                 </div>
 
-                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-slate-800 text-right">
+                <div class="pt-4 mt-4 border-t border-gray-100 dark:border-[#1F2026] text-right">
                     <button type="button" wire:click="closeTraceModal" class="px-4 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300">
                         Tutup
                     </button>

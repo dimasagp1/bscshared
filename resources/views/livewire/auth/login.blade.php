@@ -1,6 +1,6 @@
 <div class="w-full max-w-[420px] mx-auto py-6" x-data="{ showPassword: false }">
     <!-- Floating White Card -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl p-8 sm:p-10 shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-slate-800 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl p-8 sm:p-10 shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-[#1F2026] transition-colors duration-200">
         
         <!-- Logo Mark Squircle Badge -->
         <div class="w-16 h-16 bg-[#E8F5E9] dark:bg-emerald-950/60 rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-xs border border-transparent dark:border-emerald-800/50">

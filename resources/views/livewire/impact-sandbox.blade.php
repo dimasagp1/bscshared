@@ -13,7 +13,7 @@
     @endif
 
     <!-- Card 1: Hero Header Card -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3.5">
             <div class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200/60 dark:border-amber-800/50 flex items-center justify-center text-xl shadow-xs shrink-0">
                 <i class="fas fa-bolt"></i>
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Card 2: Form Kontrol Parameter Realisasi KPI -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-4 transition-colors duration-200">
         <h3 class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider">
             KONTROL PARAMETER REALISASI KPI
         </h3>
@@ -87,9 +87,9 @@
     </div>
 
     <!-- Card 3: Hasil Simulasi & Transmisi (4 Tab Interaktif) -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs space-y-5 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-5 sm:p-6 shadow-xs space-y-5 transition-colors duration-200">
         <!-- 4 Tab Bar -->
-        <div class="flex items-center gap-6 border-b border-gray-200 dark:border-slate-800 overflow-x-auto text-xs">
+        <div class="flex items-center gap-6 border-b border-gray-200 dark:border-[#1F2026] overflow-x-auto text-xs">
             <button wire:click="setTab('diagram')" type="button" 
                     class="pb-3 font-semibold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 {{ $activeTab === 'diagram' ? 'border-b-2 border-[#166534] dark:border-emerald-500 text-[#166534] dark:text-emerald-400 font-bold' : 'text-gray-500 hover:text-gray-800 dark:text-slate-400 dark:hover:text-white' }}">
                 <i class="fas fa-chart-line text-[11px]"></i>
@@ -119,7 +119,7 @@
         @if($activeTab === 'diagram')
             @if(!$isCalculated)
                 <!-- Empty State matching reference screenshot -->
-                <div class="border border-gray-200/80 dark:border-slate-800 rounded-2xl p-12 text-center flex flex-col items-center justify-center space-y-2.5">
+                <div class="border border-gray-200/80 dark:border-[#1F2026] rounded-2xl p-12 text-center flex flex-col items-center justify-center space-y-2.5">
                     <div class="w-12 h-12 rounded-full bg-gray-50 dark:bg-slate-900 text-gray-400 dark:text-slate-500 flex items-center justify-center text-xl mb-1">
                         <i class="fas fa-code-branch"></i>
                     </div>
@@ -135,7 +135,7 @@
                 <div class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
                         <!-- Hop 1: Sasaran Mutu Departemen -->
-                        <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800 space-y-2">
+                        <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-900/60 border border-gray-200 dark:border-[#1F2026] space-y-2">
                             <span class="text-[10px] uppercase font-bold text-[#166534] dark:text-emerald-400 tracking-wider block">
                                 HOP 1: SASARAN MUTU DEPARTEMEN
                             </span>
@@ -145,7 +145,7 @@
                             <div class="text-xs text-gray-700 dark:text-slate-300 font-medium">
                                 {{ $currentKpi['name'] }}
                             </div>
-                            <div class="pt-2 border-t border-gray-200/60 dark:border-slate-800 text-[11px] space-y-1">
+                            <div class="pt-2 border-t border-gray-200/60 dark:border-[#1F2026] text-[11px] space-y-1">
                                 <div class="flex justify-between">
                                     <span class="text-gray-500 dark:text-slate-400">Target Resmi:</span>
                                     <span class="font-mono font-bold text-gray-900 dark:text-white">{{ $currentKpi['target'] }}{{ $currentKpi['unit'] }}</span>
@@ -211,7 +211,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse text-xs">
                     <thead>
-                        <tr class="bg-gray-50/70 dark:bg-slate-900/60 border-b border-gray-100 dark:border-slate-800 text-[10px] uppercase tracking-wider text-gray-500 dark:text-slate-400 font-bold">
+                        <tr class="bg-gray-50/70 dark:bg-slate-900/60 border-b border-gray-100 dark:border-[#1F2026] text-[10px] uppercase tracking-wider text-gray-500 dark:text-slate-400 font-bold">
                             <th class="py-3 px-4">Pos / Indikator</th>
                             <th class="py-3 px-4">Klasifikasi</th>
                             <th class="py-3 px-4 text-right">Nilai Baseline</th>
@@ -246,7 +246,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse text-xs">
                     <thead>
-                        <tr class="bg-gray-50/70 dark:bg-slate-900/60 border-b border-gray-100 dark:border-slate-800 text-[10px] uppercase tracking-wider text-gray-500 dark:text-slate-400 font-bold">
+                        <tr class="bg-gray-50/70 dark:bg-slate-900/60 border-b border-gray-100 dark:border-[#1F2026] text-[10px] uppercase tracking-wider text-gray-500 dark:text-slate-400 font-bold">
                             <th class="py-3 px-4">Nama Akun CoA</th>
                             <th class="py-3 px-4 text-right">Debet</th>
                             <th class="py-3 px-4 text-right">Kredit</th>

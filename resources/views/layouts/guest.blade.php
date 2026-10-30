@@ -61,7 +61,7 @@
         }
     </style>
 </head>
-<body class="bg-[#F8FAFC] dark:bg-[#0B1120] flex items-center justify-center p-4 min-h-screen text-slate-800 dark:text-slate-100 antialiased selection:bg-green-100 selection:text-green-900 transition-colors duration-200">
+<body class="bg-[#F8FAFC] dark:bg-[#121214] flex items-center justify-center p-4 min-h-screen text-slate-800 dark:text-slate-100 antialiased selection:bg-green-100 selection:text-green-900 transition-colors duration-200">
     <main class="w-full flex items-center justify-center">
         {{ $slot }}
     </main>

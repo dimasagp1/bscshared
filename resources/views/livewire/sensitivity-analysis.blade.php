@@ -14,7 +14,7 @@
     @endif
 
     <!-- HERO HEADER CARD: KALIBRASI MARGIN SAFETY & STRESS TEST -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3.5">
             <div class="w-10 h-10 rounded-2xl bg-green-50 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-400 border border-green-100 dark:border-emerald-900/50 flex items-center justify-center text-base shadow-xs">
                 <i class="fas fa-wave-square"></i>
@@ -40,7 +40,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         
         <!-- SUB-CARD 1: PENGETATAN AMBANG BATAS (TIGHTENING) -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-col justify-between transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-col justify-between transition-colors duration-200">
             <div>
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-slate-200 flex items-center gap-2">
@@ -72,7 +72,7 @@
         </div>
 
         <!-- SUB-CARD 2: PILIH SKENARIO STRESS-TEST -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-col justify-between transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-col justify-between transition-colors duration-200">
             <div>
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-slate-200 flex items-center gap-2">
@@ -118,7 +118,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <!-- Stat 1: Skor Ketahanan Korporat -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-2xl border border-gray-200 dark:border-slate-800 p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-2xl border border-gray-200 dark:border-[#1F2026] p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
             <div>
                 <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Skor Ketahanan Korporat</span>
                 <span class="text-3xl font-extrabold text-gray-900 dark:text-slate-100 font-mono">{{ $resilienceScore }}%</span>
@@ -129,7 +129,7 @@
         </div>
 
         <!-- Stat 2: Zona Aman (Safe Buffer) -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-2xl border border-gray-200 dark:border-slate-800 p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-2xl border border-gray-200 dark:border-[#1F2026] p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
             <div>
                 <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Zona Aman (Safe Buffer)</span>
                 <span class="text-3xl font-extrabold text-[#15803D] dark:text-emerald-400 font-mono">{{ $safeCount }} Rasio</span>
@@ -140,7 +140,7 @@
         </div>
 
         <!-- Stat 3: Zona Waspada (Tipis) -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-2xl border border-gray-200 dark:border-slate-800 p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-2xl border border-gray-200 dark:border-[#1F2026] p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
             <div>
                 <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Zona Waspada (Tipis)</span>
                 <span class="text-3xl font-extrabold text-[#D97706] dark:text-amber-400 font-mono">{{ $warnCount }} Rasio</span>
@@ -151,7 +151,7 @@
         </div>
 
         <!-- Stat 4: Jatuh di Bawah Ambang -->
-        <div class="bg-white dark:bg-[#0F172A] rounded-2xl border border-gray-200 dark:border-slate-800 p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
+        <div class="bg-white dark:bg-[#121214] rounded-2xl border border-gray-200 dark:border-[#1F2026] p-4 shadow-xs flex items-center justify-between transition-colors duration-200">
             <div>
                 <span class="text-[11px] font-medium text-gray-500 dark:text-slate-400 block mb-1">Jatuh di Bawah Ambang</span>
                 <span class="text-3xl font-extrabold text-[#DC2626] dark:text-rose-400 font-mono">{{ $dangerCount }} Rasio</span>
@@ -164,10 +164,10 @@
     </div>
 
     <!-- DATA TABLE: MATRIKS MARGIN SAFETY & SENSITIVITAS RASIO -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 shadow-xs overflow-hidden transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] shadow-xs overflow-hidden transition-colors duration-200">
         
         <!-- Table Header -->
-        <div class="p-5 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+        <div class="p-5 border-b border-gray-100 dark:border-[#1F2026] flex items-center justify-between">
             <h3 class="text-xs font-bold uppercase tracking-wider text-gray-900 dark:text-slate-100 flex items-center gap-2">
                 <i class="fas fa-table-cells text-[#10B981]"></i>
                 <span>MATRIKS MARGIN SAFETY &amp; SENSITIVITAS RASIO</span>
@@ -179,7 +179,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left text-xs border-collapse">
                 <thead>
-                    <tr class="bg-gray-50/75 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+                    <tr class="bg-gray-50/75 dark:bg-slate-800/60 border-b border-gray-100 dark:border-[#1F2026] text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                         <th class="py-3 px-5">KODE &amp; NAMA RASIO</th>
                         <th class="py-3 px-4">KATEGORI</th>
                         <th class="py-3 px-4 text-center">AKTUAL / SHOCKED</th>

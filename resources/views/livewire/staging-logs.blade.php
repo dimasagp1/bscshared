@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <!-- Header Banner -->
-    <div class="bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs flex flex-wrap items-center justify-between gap-4 transition-colors duration-200">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-transparent dark:border-cyan-900/50 flex items-center justify-center text-xl shadow-xs">
                 <i class="fas fa-clock-rotate-left"></i>
@@ -33,28 +33,28 @@
 
     <!-- TELEMETRY & RECONCILIATION SUMMARY (4 CARDS) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#121214] border border-gray-200 dark:border-[#1F2026] shadow-xs transition-colors duration-200">
             <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Control Total Match</span>
             <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['control_total'] }}</span>
             <span class="text-[11px] text-[#166534] dark:text-emerald-400 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-check-circle text-[10px]"></i> 100% Cocok SSOT
             </span>
         </div>
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#121214] border border-gray-200 dark:border-[#1F2026] shadow-xs transition-colors duration-200">
             <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Integritas Hash (Idempotency)</span>
             <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['hash_integrity'] }}</span>
             <span class="text-[11px] text-cyan-700 dark:text-cyan-300 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-shield-check text-[10px]"></i> Zero Collision
             </span>
         </div>
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#121214] border border-gray-200 dark:border-[#1F2026] shadow-xs transition-colors duration-200">
             <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Kelengkapan Data Periode</span>
             <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['completeness'] }}</span>
             <span class="text-[11px] text-blue-700 dark:text-blue-300 font-medium mt-1 flex items-center gap-1">
                 <i class="fas fa-layer-group text-[10px]"></i> 35 KPI Lengkap
             </span>
         </div>
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0F172A] border border-gray-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#121214] border border-gray-200 dark:border-[#1F2026] shadow-xs transition-colors duration-200">
             <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 block uppercase tracking-wider">Kesegaran Data (26 Jam)</span>
             <span class="text-base font-extrabold text-gray-900 dark:text-slate-100 font-mono mt-1 block">{{ $reconciliationMetrics['freshness'] }}</span>
             <span class="text-[11px] text-[#166534] dark:text-emerald-400 font-medium mt-1 flex items-center gap-1">
@@ -66,7 +66,7 @@
     <!-- MAIN 2 COLUMNS: SIMULASI & LOG TABLE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <!-- SIMULASI INBOUND (col-span-4) -->
-        <div class="lg:col-span-4 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 p-6 shadow-xs space-y-4 transition-colors duration-200">
+        <div class="lg:col-span-4 bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] p-6 shadow-xs space-y-4 transition-colors duration-200">
             <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
                 <i class="fas fa-paper-plane text-cyan-600 dark:text-cyan-400"></i>
                 <span>Simulasi Inbound API (Hop 3 &rarr; Hop 4)</span>
@@ -96,8 +96,8 @@
         </div>
 
         <!-- RIWAYAT LOG TABLE (col-span-8) -->
-        <div class="lg:col-span-8 bg-white dark:bg-[#0F172A] rounded-3xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-xs transition-colors duration-200">
-            <div class="p-5 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+        <div class="lg:col-span-8 bg-white dark:bg-[#121214] rounded-3xl border border-gray-200 dark:border-[#1F2026] overflow-hidden shadow-xs transition-colors duration-200">
+            <div class="p-5 border-b border-gray-100 dark:border-[#1F2026] flex items-center justify-between">
                 <h3 class="text-xs font-bold text-gray-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
                     <i class="fas fa-list-check text-gray-400 dark:text-slate-500"></i>
                     <span>Riwayat Staging &amp; Audit Log</span>
@@ -107,7 +107,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs">
                     <thead>
-                        <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-800 text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+                        <tr class="bg-gray-50/70 dark:bg-slate-800/60 border-b border-gray-100 dark:border-[#1F2026] text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                             <th class="py-3 px-4">Periode</th>
                             <th class="py-3 px-4">Dept</th>
                             <th class="py-3 px-4">Idempotency Key</th>
