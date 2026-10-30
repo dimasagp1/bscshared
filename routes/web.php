@@ -46,13 +46,11 @@ Route::middleware(['auth', 'active'])->group(function () {
     // 7 Action Plan — view actionplans
     Route::get('/action-plans', ActionPlans::class)->middleware('permission:view actionplans|view dashboard')->name('action-plans');
     // 8 Konsensus IBP — view ibp
-    Route::get('/ibp', \App\Livewire\ComingSoon::class)->middleware('permission:view ibp')->name('ibp')
-        ->defaults('title', 'Konsensus IBP')->defaults('desc', 'IBP 5 langkah: Product→Demand→Supply→Rekonsiliasi Finansial→MBR, proyeksi 12 bulan.');
+    Route::get('/ibp', \App\Livewire\IbpConsensus::class)->middleware('permission:view ibp')->name('ibp');
     // 9 Sensitivitas — view sensitivity
     Route::get('/sensitivity', SensitivityAnalysis::class)->middleware('permission:view sensitivity|view dashboard')->name('sensitivity');
     // 10 Skenario — view skenario
-    Route::get('/skenario', \App\Livewire\ComingSoon::class)->middleware('permission:view skenario')->name('skenario')
-        ->defaults('title', 'Skenario')->defaults('desc', 'Simpan/muat skenario, undo/redo 50 langkah.');
+    Route::get('/skenario', \App\Livewire\ScenarioHistory::class)->middleware('permission:view skenario')->name('skenario');
     // 11 Dokumentasi Metode — view dokumentasi
     Route::get('/dokumentasi', MethodDocumentation::class)->middleware('permission:view dokumentasi|view dashboard')->name('dokumentasi');
     // 12 Gateway & Audit — view gateway (umbrella) + specific
