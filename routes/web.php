@@ -39,8 +39,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     // 4 Wiring — view wiring
     Route::get('/wiring', BscWiring::class)->middleware('permission:view wiring')->name('bsc-wiring');
     // 5 Dampak / What-If Sandbox — view dampak (Super Admin, FAT, Kadep)
-    Route::get('/dampak', \App\Livewire\ComingSoon::class)->middleware('permission:view dampak')->name('dampak')
-        ->defaults('title', 'Uji Dampak / What-If Sandbox')->defaults('desc', 'Sandbox simulasi KPI hipotetis — pratinjau debet-kredit tanpa menyentuh data produksi.');
+    Route::get('/dampak', \App\Livewire\ImpactSandbox::class)->middleware('permission:view dampak')->name('dampak');
     // 6 Simulasi CoA — view coa (Super Admin, FAT)
     Route::get('/coa', \App\Livewire\CoaSimulation::class)->middleware('permission:view coa')->name('coa');
     // 7 Action Plan — view actionplans

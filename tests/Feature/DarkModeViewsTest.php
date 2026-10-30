@@ -42,6 +42,7 @@ class DarkModeViewsTest extends TestCase
             route('financial-ratios'),
             route('department-objectives'),
             route('bsc-wiring'),
+            route('dampak'),
             route('coa'),
             route('sensitivity'),
             route('skenario'),
