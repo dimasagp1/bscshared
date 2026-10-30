@@ -42,8 +42,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/dampak', \App\Livewire\ComingSoon::class)->middleware('permission:view dampak')->name('dampak')
         ->defaults('title', 'Uji Dampak / What-If Sandbox')->defaults('desc', 'Sandbox simulasi KPI hipotetis — pratinjau debet-kredit tanpa menyentuh data produksi.');
     // 6 Simulasi CoA — view coa (Super Admin, FAT)
-    Route::get('/coa', \App\Livewire\ComingSoon::class)->middleware('permission:view coa')->name('coa')
-        ->defaults('title', 'Simulasi CoA')->defaults('desc', 'Stress-test bagan akun hipotetis — konsisten rumus rasio Menu 2.');
+    Route::get('/coa', \App\Livewire\CoaSimulation::class)->middleware('permission:view coa')->name('coa');
     // 7 Action Plan — view actionplans
     Route::get('/action-plans', ActionPlans::class)->middleware('permission:view actionplans|view dashboard')->name('action-plans');
     // 8 Konsensus IBP — view ibp
