@@ -62,14 +62,16 @@
     @if($activeTab === 'macro')
 
         <!-- Top Simulator Row: Target Revenue Slider + 5 Driver Stepper Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
             
             <!-- Card 1: Target Revenue Box with Slider -->
-            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-emerald-200 dark:border-emerald-800/60 p-4 shadow-xs flex flex-col justify-between transition-colors duration-200">
-                <div class="flex items-center justify-between mb-1.5">
-                    <span class="text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">TARGET REVENUE</span>
-                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-300 font-mono font-bold text-[11px]">
-                        Rp {{ number_format($simulatedRevenueValue / 1000, 3, '.', '') }} jt
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-emerald-200 dark:border-emerald-800/60 p-3 sm:p-3.5 shadow-xs flex flex-col justify-between transition-colors duration-200">
+                <div class="flex items-center justify-between gap-1.5 mb-1.5 min-w-0">
+                    <span class="text-[10px] sm:text-[11px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider leading-tight">
+                        TARGET REVENUE
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-[#166534] dark:text-emerald-300 font-mono font-bold text-[10.5px] whitespace-nowrap shrink-0 shadow-2xs">
+                        Rp&nbsp;{{ number_format($simulatedRevenueValue / 1000, 3, '.', '') }}&nbsp;jt
                     </span>
                 </div>
                 <div class="my-2">
@@ -88,9 +90,9 @@
             </div>
 
             <!-- Card 2: Profitabilitas Stepper -->
-            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#10B981]/50 dark:border-[#10B981]/40 p-4 shadow-xs flex flex-col justify-between transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#10B981]/50 dark:border-[#10B981]/40 p-3 sm:p-3.5 shadow-xs flex flex-col justify-between transition-colors duration-200">
                 <div>
-                    <span class="text-xs font-bold text-gray-900 dark:text-white block">Profitabilitas</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-white block truncate">Profitabilitas</span>
                     <span class="text-[10px] font-mono text-gray-400 dark:text-slate-400">
                         k {{ $drivers['profitabilitas']['k_formatted'] }} &middot; e 0,78
                     </span>
@@ -113,9 +115,9 @@
             </div>
 
             <!-- Card 3: Aktivitas Stepper -->
-            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#F59E0B]/50 dark:border-[#F59E0B]/40 p-4 shadow-xs flex flex-col justify-between transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#F59E0B]/50 dark:border-[#F59E0B]/40 p-3 sm:p-3.5 shadow-xs flex flex-col justify-between transition-colors duration-200">
                 <div>
-                    <span class="text-xs font-bold text-gray-900 dark:text-white block">Aktivitas</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-white block truncate">Aktivitas</span>
                     <span class="text-[10px] font-mono text-gray-400 dark:text-slate-400">
                         k {{ $drivers['aktivitas']['k_formatted'] }} &middot; e 0,88
                     </span>
@@ -138,9 +140,9 @@
             </div>
 
             <!-- Card 4: Produktivitas Stepper -->
-            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#0284C7]/50 dark:border-[#0284C7]/40 p-4 shadow-xs flex flex-col justify-between transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#0284C7]/50 dark:border-[#0284C7]/40 p-3 sm:p-3.5 shadow-xs flex flex-col justify-between transition-colors duration-200">
                 <div>
-                    <span class="text-xs font-bold text-gray-900 dark:text-white block">Produktivitas</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-white block truncate">Produktivitas</span>
                     <span class="text-[10px] font-mono text-gray-400 dark:text-slate-400">
                         k {{ $drivers['produktivitas']['k_formatted'] }} &middot; e 0,93
                     </span>
@@ -163,9 +165,9 @@
             </div>
 
             <!-- Card 5: Likuiditas Stepper -->
-            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#0D9488]/50 dark:border-[#0D9488]/40 p-4 shadow-xs flex flex-col justify-between transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#0D9488]/50 dark:border-[#0D9488]/40 p-3 sm:p-3.5 shadow-xs flex flex-col justify-between transition-colors duration-200">
                 <div>
-                    <span class="text-xs font-bold text-gray-900 dark:text-white block">Likuiditas</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-white block truncate">Likuiditas</span>
                     <span class="text-[10px] font-mono text-gray-400 dark:text-slate-400">
                         k {{ $drivers['likuiditas']['k_formatted'] }} &middot; e 0,50
                     </span>
@@ -188,9 +190,9 @@
             </div>
 
             <!-- Card 6: Solvabilitas Stepper -->
-            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#8B5CF6]/50 dark:border-[#8B5CF6]/40 p-4 shadow-xs flex flex-col justify-between transition-colors duration-200">
+            <div class="bg-white dark:bg-[#121214] rounded-2xl border border-[#8B5CF6]/50 dark:border-[#8B5CF6]/40 p-3 sm:p-3.5 shadow-xs flex flex-col justify-between transition-colors duration-200">
                 <div>
-                    <span class="text-xs font-bold text-gray-900 dark:text-white block">Solvabilitas</span>
+                    <span class="text-xs font-bold text-gray-900 dark:text-white block truncate">Solvabilitas</span>
                     <span class="text-[10px] font-mono text-gray-400 dark:text-slate-400">
                         k {{ $drivers['solvabilitas']['k_formatted'] }} &middot; e 0,20
                     </span>
@@ -685,14 +687,14 @@
         </div>
 
         @php
-            // Driver rail configuration for bus tracks (Compact 14px spacing, total column width 195px)
+            // Driver rail configuration for bus tracks (14px spacing, box width 114px, total column width 226px)
             $driverTracks = [
-                'profitabilitas' => ['color' => '#10B981', 'name' => 'Profitabilitas', 'x' => 108],
-                'revenue'        => ['color' => '#00A859', 'name' => 'Revenue',        'x' => 122],
-                'aktivitas'      => ['color' => '#F59E0B', 'name' => 'Aktivitas',      'x' => 136],
-                'produktivitas'  => ['color' => '#0284C7', 'name' => 'Produktivitas',  'x' => 150],
-                'likuiditas'     => ['color' => '#0D9488', 'name' => 'Likuiditas',     'x' => 164],
-                'solvabilitas'   => ['color' => '#8B5CF6', 'name' => 'Solvabilitas',   'x' => 178],
+                'profitabilitas' => ['color' => '#10B981', 'name' => 'Profitabilitas', 'x' => 138],
+                'revenue'        => ['color' => '#00A859', 'name' => 'Revenue',        'x' => 152],
+                'aktivitas'      => ['color' => '#F59E0B', 'name' => 'Aktivitas',      'x' => 166],
+                'produktivitas'  => ['color' => '#0284C7', 'name' => 'Produktivitas',  'x' => 180],
+                'likuiditas'     => ['color' => '#0D9488', 'name' => 'Likuiditas',     'x' => 194],
+                'solvabilitas'   => ['color' => '#8B5CF6', 'name' => 'Solvabilitas',   'x' => 208],
             ];
             $trackKeys = array_keys($driverTracks);
         @endphp
@@ -703,7 +705,7 @@
             <div class="relative w-full">
 
                 <!-- CONTINUOUS 6 VERTICAL BUS RAILS LAYER (Starts directly behind the 6 top terminal dots down to bottom) -->
-                <div class="absolute top-[27px] bottom-3 pointer-events-none w-[195px] z-10" style="left: 0;">
+                <div class="absolute top-[30px] bottom-3 pointer-events-none w-[226px] z-10" style="left: 0;">
                     @foreach($trackKeys as $tIndex => $tKey)
                         @php
                             $tColor = $driverTracks[$tKey]['color'];
@@ -717,35 +719,35 @@
                 <!-- TOP SCHEMATIC HEADER: Target Revenue Origin & Uji Kaskade Slider -->
                 <div class="relative flex items-center justify-between pb-3.5 gap-3 z-20">
                     
-                    <!-- Left: Target Revenue Node Box & Feeder Bus (w-[195px]) -->
-                    <div class="flex items-center w-[195px] flex-shrink-0 relative h-10">
-                        <!-- Target Revenue Node Box (w-[88px]) -->
-                        <div class="relative w-[88px] h-[38px] px-2 py-0.5 rounded-2xl bg-emerald-50/20 dark:bg-[#121A16] border border-emerald-500/70 flex flex-col justify-center flex-shrink-0 shadow-2xs">
-                            <span class="text-[9px] font-bold text-emerald-500 dark:text-emerald-400 leading-tight">Target revenue</span>
+                    <!-- Left: Target Revenue Node Box & Feeder Bus (w-[226px]) -->
+                    <div class="flex items-center w-[226px] flex-shrink-0 relative h-11">
+                        <!-- Target Revenue Node Box (w-[114px]) -->
+                        <div class="relative w-[114px] h-[40px] px-2.5 py-1 rounded-2xl bg-emerald-50/20 dark:bg-[#121A16] border border-emerald-500/70 flex flex-col justify-center flex-shrink-0 shadow-2xs">
+                            <span class="text-[9.5px] font-bold text-emerald-500 dark:text-emerald-400 leading-tight">Target revenue</span>
                             <span class="text-[11px] font-mono font-bold text-gray-900 dark:text-white leading-tight mt-0.5 whitespace-nowrap">
-                                k {{ $kRevenueFormatted }} &middot; {{ $deltaRPercent >= 0 ? '+' : '' }}{{ $deltaRPercent }}%
+                                k {{ $kRevenueFormatted }} &middot; {{ $deltaRPercent >= 0 ? '+' : '' }}{{ number_format($deltaRPercent, 1) }}%
                             </span>
 
-                            <!-- Exit Node on right border (centered at x=88, y=19) -->
-                            <div class="absolute -right-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#10B981] ring-2 ring-white dark:ring-[#121214] z-30"></div>
+                            <!-- Exit Node on right border (centered at x=114, y=20) -->
+                            <div class="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#10B981] ring-2 ring-white z-30"></div>
                         </div>
 
                         <!-- Origin Feeder SVG: blue trunk line + curved branches down into 6 rails -->
-                        <svg class="w-[107px] h-[38px] flex-shrink-0 overflow-visible" viewBox="0 0 107 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Blue/Purple Feeder Bus Trunk Line from (0, 19) to (90, 19) -->
-                            <path d="M 0,19 H 90" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" opacity="0.85" />
+                        <svg class="w-[112px] h-[40px] flex-shrink-0 overflow-visible" viewBox="0 0 112 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Blue/Purple Feeder Bus Trunk Line from (0, 20) to (86, 20) where 6th rail begins -->
+                            <path d="M 0,20 H 86" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" opacity="0.85" />
                             
-                            <!-- 6 Curved Branches and Drop Rails to meet continuous vertical lines at y=26 -->
+                            <!-- 6 Curved Branches and Drop Rails to meet continuous vertical lines at y=30 -->
                             @foreach($trackKeys as $tIndex => $tKey)
                                 @php
                                     $tColor = $driverTracks[$tKey]['color'];
-                                    $relX = $driverTracks[$tKey]['x'] - 88;
+                                    $relX = $driverTracks[$tKey]['x'] - 114;
                                 @endphp
-                                <!-- Smooth quarter-arc curve bending down from trunk into vertical drop -->
-                                <path d="M {{ $relX - 8 }},19 Q {{ $relX }},19 {{ $relX }},26 V 38" stroke="{{ $tColor }}" stroke-width="2" opacity="0.85" />
+                                <!-- Smooth quarter-arc curve bending down from trunk at y=20 into vertical drop at y=28 and continuing down -->
+                                <path d="M {{ $relX - 8 }},20 Q {{ $relX }},20 {{ $relX }},28 V 40" stroke="{{ $tColor }}" stroke-width="2" opacity="0.85" />
                                 
                                 <!-- Terminal Origin Dot with white ring (Matching Gambar 1) -->
-                                <circle cx="{{ $relX }}" cy="26" r="3" fill="{{ $tColor }}" stroke="white" stroke-width="1.5" />
+                                <circle cx="{{ $relX }}" cy="30" r="3" fill="{{ $tColor }}" stroke="white" stroke-width="1.5" />
                             @endforeach
                         </svg>
                     </div>
@@ -780,8 +782,8 @@
                         <!-- DEPARTMENT HEADER ROW (Clean Minimalist Typography, Rails Pass Cleanly on Left) -->
                         <div class="relative flex items-center pt-3 pb-1.5 transition-colors">
                             
-                            <!-- LEFT: Spacer matching the 6 vertical rails (w-[195px]) -->
-                            <div class="w-[195px] flex-shrink-0"></div>
+                            <!-- LEFT: Spacer matching the 6 vertical rails (w-[226px]) -->
+                            <div class="w-[226px] flex-shrink-0"></div>
 
                             <!-- RIGHT: Department Title & Sasaran Count -->
                             <div class="flex-1 flex items-center justify-between pl-3 pr-1 min-w-0">
@@ -806,8 +808,8 @@
                         @foreach($dept['kpis'] as $kpi)
                             <div class="relative flex items-center hover:bg-gray-50/60 dark:hover:bg-[#161619] transition-colors py-0.5 text-xs group">
                                 
-                                <!-- LEFT: 6 Rail Column with Junction Dots, Horizontal Tap Wire, & End Node Dot (w-[195px]) -->
-                                <div class="w-[195px] flex-shrink-0 relative h-6 flex items-center">
+                                <!-- LEFT: 6 Rail Column with Junction Dots, Horizontal Tap Wire, & End Node Dot (w-[226px]) -->
+                                <div class="w-[226px] flex-shrink-0 relative h-6 flex items-center">
                                     @php
                                         // Identify which tracks connect to this KPI
                                         $connectedTrackIndexes = [];
@@ -819,7 +821,7 @@
                                         }
                                         $minTrack = count($connectedTrackIndexes) > 0 ? min($connectedTrackIndexes) : null;
                                         $leadColor = $minTrack !== null ? $driverTracks[$trackKeys[$minTrack]]['color'] : '#10B981';
-                                        $minX = $minTrack !== null ? $driverTracks[$trackKeys[$minTrack]]['x'] : 108;
+                                        $minX = $minTrack !== null ? $driverTracks[$trackKeys[$minTrack]]['x'] : 138;
                                     @endphp
 
                                     <!-- Junction dot on each connected rail (Matching Gambar 1) -->
@@ -830,7 +832,7 @@
                                             $isTapped = in_array($tIndex, $connectedTrackIndexes);
                                         @endphp
                                         @if($isTapped)
-                                            <div class="absolute w-2.5 h-2.5 rounded-full ring-2 ring-white dark:ring-[#121214] z-20" 
+                                            <div class="absolute w-2.5 h-2.5 rounded-full ring-2 ring-white z-20" 
                                                  style="left: {{ $xPos }}px; top: 50%; transform: translate(-50%, -50%); background-color: {{ $tColor }};"></div>
                                         @endif
                                     @endforeach
@@ -841,7 +843,7 @@
                                              style="left: {{ $minX }}px; right: 0; top: 50%; transform: translateY(-50%); background-color: {{ $leadColor }};"></div>
                                         
                                         <!-- Terminal Dot with white ring right in front of the KPI capsule (Matching Gambar 1) -->
-                                        <div class="absolute w-2.5 h-2.5 rounded-full ring-2 ring-white dark:ring-[#121214] z-20" 
+                                        <div class="absolute w-2.5 h-2.5 rounded-full ring-2 ring-white z-20" 
                                              style="right: -4px; top: 50%; transform: translateY(-50%); background-color: {{ $leadColor }};"></div>
                                     @endif
                                 </div>
