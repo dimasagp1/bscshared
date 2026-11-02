@@ -212,20 +212,26 @@
             <!-- Collapse Button: < Kecilkan Menu -->
             <button type="button" 
                     @click="sidebarCollapsed = !sidebarCollapsed" 
-                    class="w-full flex items-center justify-center gap-2 py-1.5 px-2 rounded-lg text-xs font-medium text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-[#18181A] transition-colors">
-                <i class="fas" :class="sidebarCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
-                <span x-show="!sidebarCollapsed" class="text-[11px]">Kecilkan Menu</span>
+                    :title="sidebarCollapsed ? 'Perbesar Menu' : 'Kecilkan Menu'"
+                    class="w-full flex items-center justify-center gap-2 py-1.5 px-2 rounded-lg text-xs font-medium text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-[#18181A] hover:text-gray-900 dark:hover:text-white transition-colors">
+                <i class="fas text-xs" :class="sidebarCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
+                <span x-show="!sidebarCollapsed" class="text-[11px] font-semibold">Kecilkan Menu</span>
             </button>
 
-            <!-- User Profile Card -->
-            <div class="p-2 rounded-xl bg-gray-50/80 dark:bg-[#18181A] border border-gray-100 dark:border-[#1F2026] flex items-center justify-between">
-                <div class="flex items-center gap-2.5 overflow-hidden">
-                    <!-- Avatar circle 'S' -->
-                    <div class="w-8 h-8 rounded-full bg-[#166534] text-white flex items-center justify-center text-xs font-bold shrink-0">
+            <!-- User Profile Card (Responsive: Vertically stacked when collapsed, horizontal when expanded) -->
+            <div :class="sidebarCollapsed ? 'flex-col items-center p-2 gap-2.5' : 'flex-row items-center justify-between p-2.5 gap-2'"
+                 class="rounded-2xl bg-gray-50/80 dark:bg-[#18181A] border border-gray-100 dark:border-[#1F2026] flex transition-all duration-200">
+                
+                <div :class="sidebarCollapsed ? 'justify-center' : 'justify-start gap-2.5'"
+                     class="flex items-center min-w-0 overflow-hidden">
+                    <!-- Avatar circle with emerald subtle ring -->
+                    <div class="w-8 h-8 rounded-full bg-[#166534] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-2xs ring-2 ring-emerald-600/20"
+                         :title="sidebarCollapsed ? '{{ auth()->check() ? auth()->user()->name : 'Super Admin BSC' }} (Super Admin)' : ''">
                         {{ auth()->check() ? strtoupper(substr(auth()->user()->name, 0, 1)) : 'S' }}
                     </div>
-                    <!-- Name & Role -->
-                    <div x-show="!sidebarCollapsed" class="overflow-hidden">
+                    
+                    <!-- Name & Role (Shown only when expanded) -->
+                    <div x-show="!sidebarCollapsed" class="overflow-hidden min-w-0">
                         <p class="text-xs font-bold text-gray-900 dark:text-slate-100 truncate">
                             {{ auth()->check() ? Str::limit(auth()->user()->name, 16) : 'Super Admin BSC' }}
                         </p>
@@ -239,7 +245,7 @@
                 <button type="button" 
                         @click="logoutModalOpen = true" 
                         title="Keluar dari sesi"
-                        class="text-gray-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 p-1 rounded-md transition-colors">
+                        class="w-7 h-7 flex items-center justify-center text-gray-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition-colors shrink-0">
                     <i class="fas fa-arrow-right-from-bracket text-xs"></i>
                 </button>
             </div>
